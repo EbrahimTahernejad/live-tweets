@@ -2,7 +2,7 @@
 
 ## Initialization
 
-To initialize this project, you need to create a copy of the [Main.template.xcconfig](Live Tweets/Resources/Configs/template.xcconfig) file, located in:
+To initialize this project, you need to create a copy of the [Main.template.xcconfig](Live%20Tweets/Resources/Configs/Main.template.xcconfig) file, located in:
 
 `Live Tweets/Resources/Configs/`
 
