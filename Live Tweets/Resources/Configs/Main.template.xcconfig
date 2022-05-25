@@ -1,0 +1,3 @@
+// Create a copy named Main.xcconfig and uncomment the following
+
+TWITTER_BEARER_TOKEN = TOKEN
