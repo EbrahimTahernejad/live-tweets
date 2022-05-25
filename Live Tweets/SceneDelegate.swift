@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let router = Router(with: ContentView.self, data: .init())
+        let router = Router(with: InitialView.self, data: .init())
         window.rootViewController = router.bottomNavigationController
         self.window = window
         self.router = router
