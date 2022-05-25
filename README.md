@@ -10,4 +10,4 @@ Name it Main.xcconfig and fill in the requires values
 
 ### Values
 
-- `TWITTER_BEARER_TOKEN`: The bearer token provided by twitter
+- `TWITTER_BEARER_TOKEN`: The bearer token provided by twitter in [developer dashboard](https://developer.twitter.com/en/portal/dashboard)
