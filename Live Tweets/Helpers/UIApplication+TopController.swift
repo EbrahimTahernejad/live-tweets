@@ -9,7 +9,7 @@ import UIKit
 
 
 extension UIApplication {
-    class func topViewController(base: UIViewController? = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.rootViewController) -> UIViewController? {
+    class func topViewController(base: UIViewController? = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController) -> UIViewController? {
         if let presented = base?.presentedViewController {
             return topViewController(base: presented)
         }

@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		031EA3F92841868F001B0E13 /* ViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031EA3F82841868F001B0E13 /* ViewProvider.swift */; };
+		031EA3FB28418748001B0E13 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031EA3FA28418748001B0E13 /* Dependencies.swift */; };
+		031EA3FE284189A2001B0E13 /* LanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031EA3FD284189A2001B0E13 /* LanguageService.swift */; };
 		033358AA283E73B4008F29FB /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358A9283E73B4008F29FB /* InitialView.swift */; };
 		033358AC283E73C0008F29FB /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358AB283E73C0008F29FB /* InitialViewModel.swift */; };
+		033358B0283E7925008F29FB /* TweetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358AF283E7925008F29FB /* TweetListView.swift */; };
+		033358B2283E849A008F29FB /* TweetListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358B1283E849A008F29FB /* TweetListViewModel.swift */; };
+		033358B5283EA8D6008F29FB /* SearchBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358B4283EA8D6008F29FB /* SearchBarComponent.swift */; };
 		036C2D42283BFA4700C9626F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036C2D41283BFA4700C9626F /* Assets.xcassets */; };
 		036C2D45283BFA4700C9626F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 036C2D44283BFA4700C9626F /* Preview Assets.xcassets */; };
 		036C2D4C283BFB9300C9626F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D4B283BFB9300C9626F /* AppDelegate.swift */; };
@@ -22,10 +28,9 @@
 		036C2D5F283BFD6C00C9626F /* Published+UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D5E283BFD6C00C9626F /* Published+UserDefaults.swift */; };
 		036C2D61283BFD9F00C9626F /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D60283BFD9F00C9626F /* String+Localization.swift */; };
 		036C2D63283BFDE000C9626F /* UIApplication+TopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D62283BFDE000C9626F /* UIApplication+TopController.swift */; };
-		036C2D66283BFE1E00C9626F /* LanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D65283BFE1E00C9626F /* LanguageService.swift */; };
 		036C2D6A283BFEE900C9626F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D69283BFEE900C9626F /* Router.swift */; };
 		036C2D6C283BFF0000C9626F /* HostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D6B283BFF0000C9626F /* HostingController.swift */; };
-		036C2D6E283BFF1300C9626F /* RouteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D6D283BFF1300C9626F /* RouteData.swift */; };
+		036C2D6E283BFF1300C9626F /* ViewModelIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D6D283BFF1300C9626F /* ViewModelIO.swift */; };
 		036C2D71283BFF2D00C9626F /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D70283BFF2D00C9626F /* NavigationController.swift */; };
 		036C2D74283BFF4300C9626F /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D73283BFF4300C9626F /* ViewModel.swift */; };
 		036C2D76283BFF5900C9626F /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 036C2D75283BFF5900C9626F /* RootView.swift */; };
@@ -33,11 +38,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		031EA3F82841868F001B0E13 /* ViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProvider.swift; sourceTree = "<group>"; };
+		031EA3FA28418748001B0E13 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		031EA3FD284189A2001B0E13 /* LanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageService.swift; sourceTree = "<group>"; };
 		033358A5283E4AED008F29FB /* Main.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.template.xcconfig; sourceTree = "<group>"; };
 		033358A6283E622B008F29FB /* Main.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.xcconfig; sourceTree = "<group>"; };
 		033358A7283E6E5A008F29FB /* Live-Tweets-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Live-Tweets-Info.plist"; sourceTree = SOURCE_ROOT; };
 		033358A9283E73B4008F29FB /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 		033358AB283E73C0008F29FB /* InitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewModel.swift; sourceTree = "<group>"; };
+		033358AF283E7925008F29FB /* TweetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetListView.swift; sourceTree = "<group>"; };
+		033358B1283E849A008F29FB /* TweetListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetListViewModel.swift; sourceTree = "<group>"; };
+		033358B4283EA8D6008F29FB /* SearchBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarComponent.swift; sourceTree = "<group>"; };
 		036C2D3A283BFA4500C9626F /* Live Tweets.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Live Tweets.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		036C2D41283BFA4700C9626F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		036C2D44283BFA4700C9626F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -52,10 +63,9 @@
 		036C2D5E283BFD6C00C9626F /* Published+UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Published+UserDefaults.swift"; sourceTree = "<group>"; };
 		036C2D60283BFD9F00C9626F /* String+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
 		036C2D62283BFDE000C9626F /* UIApplication+TopController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopController.swift"; sourceTree = "<group>"; };
-		036C2D65283BFE1E00C9626F /* LanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageService.swift; sourceTree = "<group>"; };
 		036C2D69283BFEE900C9626F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		036C2D6B283BFF0000C9626F /* HostingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingController.swift; sourceTree = "<group>"; };
-		036C2D6D283BFF1300C9626F /* RouteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteData.swift; sourceTree = "<group>"; };
+		036C2D6D283BFF1300C9626F /* ViewModelIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelIO.swift; sourceTree = "<group>"; };
 		036C2D70283BFF2D00C9626F /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		036C2D73283BFF4300C9626F /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		036C2D75283BFF5900C9626F /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -73,6 +83,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031EA3FC2841875F001B0E13 /* Dependency Injection */ = {
+			isa = PBXGroup;
+			children = (
+				031EA3FA28418748001B0E13 /* Dependencies.swift */,
+				036C2D77283BFF7000C9626F /* Service.swift */,
+				031EA3F82841868F001B0E13 /* ViewProvider.swift */,
+				036C2D6B283BFF0000C9626F /* HostingController.swift */,
+			);
+			path = "Dependency Injection";
+			sourceTree = "<group>";
+		};
+		031EA4012842D484001B0E13 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				031EA3FD284189A2001B0E13 /* LanguageService.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
 		033358A3283E4AA6008F29FB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +138,23 @@
 			path = Initial;
 			sourceTree = "<group>";
 		};
+		033358AE283E7912008F29FB /* TweetList */ = {
+			isa = PBXGroup;
+			children = (
+				033358AF283E7925008F29FB /* TweetListView.swift */,
+				033358B1283E849A008F29FB /* TweetListViewModel.swift */,
+			);
+			path = TweetList;
+			sourceTree = "<group>";
+		};
+		033358B3283EA88C008F29FB /* SearchBar */ = {
+			isa = PBXGroup;
+			children = (
+				033358B4283EA8D6008F29FB /* SearchBarComponent.swift */,
+			);
+			path = SearchBar;
+			sourceTree = "<group>";
+		};
 		036C2D31283BFA4500C9626F = {
 			isa = PBXGroup;
 			children = (
@@ -129,9 +175,9 @@
 			isa = PBXGroup;
 			children = (
 				033358A7283E6E5A008F29FB /* Live-Tweets-Info.plist */,
+				031EA3FC2841875F001B0E13 /* Dependency Injection */,
 				033358A3283E4AA6008F29FB /* Resources */,
 				036C2D79283BFFD000C9626F /* UI */,
-				036C2D68283BFED600C9626F /* Router */,
 				036C2D64283BFE1100C9626F /* Services */,
 				036C2D50283BFC5800C9626F /* Helpers */,
 				036C2D4F283BFBFA00C9626F /* BaseUI */,
@@ -175,7 +221,8 @@
 		036C2D64283BFE1100C9626F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				036C2D65283BFE1E00C9626F /* LanguageService.swift */,
+				031EA4012842D484001B0E13 /* Language */,
+				036C2D68283BFED600C9626F /* Router */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -192,12 +239,10 @@
 			isa = PBXGroup;
 			children = (
 				036C2D69283BFEE900C9626F /* Router.swift */,
-				036C2D6B283BFF0000C9626F /* HostingController.swift */,
-				036C2D6D283BFF1300C9626F /* RouteData.swift */,
+				036C2D6D283BFF1300C9626F /* ViewModelIO.swift */,
 				036C2D70283BFF2D00C9626F /* NavigationController.swift */,
 				036C2D73283BFF4300C9626F /* ViewModel.swift */,
 				036C2D75283BFF5900C9626F /* RootView.swift */,
-				036C2D77283BFF7000C9626F /* Service.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -214,6 +259,7 @@
 		036C2D7A283BFFD700C9626F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				033358B3283EA88C008F29FB /* SearchBar */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -221,6 +267,7 @@
 		036C2D7B283BFFFF00C9626F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				033358AE283E7912008F29FB /* TweetList */,
 				033358AD283E73C4008F29FB /* Initial */,
 			);
 			path = Views;
@@ -298,24 +345,29 @@
 			files = (
 				036C2D6C283BFF0000C9626F /* HostingController.swift in Sources */,
 				036C2D53283BFC6C00C9626F /* Text+Style.swift in Sources */,
+				031EA3FB28418748001B0E13 /* Dependencies.swift in Sources */,
 				036C2D61283BFD9F00C9626F /* String+Localization.swift in Sources */,
-				036C2D6E283BFF1300C9626F /* RouteData.swift in Sources */,
+				036C2D6E283BFF1300C9626F /* ViewModelIO.swift in Sources */,
 				036C2D59283BFCD800C9626F /* Color+App.swift in Sources */,
 				036C2D71283BFF2D00C9626F /* NavigationController.swift in Sources */,
 				036C2D76283BFF5900C9626F /* RootView.swift in Sources */,
 				033358AC283E73C0008F29FB /* InitialViewModel.swift in Sources */,
+				031EA3F92841868F001B0E13 /* ViewProvider.swift in Sources */,
 				036C2D57283BFCBF00C9626F /* Image+App.swift in Sources */,
+				033358B5283EA8D6008F29FB /* SearchBarComponent.swift in Sources */,
 				036C2D63283BFDE000C9626F /* UIApplication+TopController.swift in Sources */,
 				036C2D4C283BFB9300C9626F /* AppDelegate.swift in Sources */,
 				036C2D74283BFF4300C9626F /* ViewModel.swift in Sources */,
 				033358AA283E73B4008F29FB /* InitialView.swift in Sources */,
 				036C2D5F283BFD6C00C9626F /* Published+UserDefaults.swift in Sources */,
-				036C2D66283BFE1E00C9626F /* LanguageService.swift in Sources */,
 				036C2D5B283BFCFD00C9626F /* View+FontStyle.swift in Sources */,
 				036C2D6A283BFEE900C9626F /* Router.swift in Sources */,
 				036C2D5D283BFD4100C9626F /* String+CamelToKebab.swift in Sources */,
 				036C2D78283BFF7000C9626F /* Service.swift in Sources */,
+				031EA3FE284189A2001B0E13 /* LanguageService.swift in Sources */,
+				033358B2283E849A008F29FB /* TweetListViewModel.swift in Sources */,
 				036C2D4E283BFBB700C9626F /* SceneDelegate.swift in Sources */,
+				033358B0283E7925008F29FB /* TweetListView.swift in Sources */,
 				036C2D55283BFC9900C9626F /* FontStyles.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,7 +506,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -485,7 +537,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

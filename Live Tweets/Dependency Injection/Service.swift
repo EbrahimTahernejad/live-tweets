@@ -8,6 +8,10 @@
 import Foundation
 import Combine
 
-class Service: ObservableObject {
+protocol ServiceProtocol: AnyObject {
+    
+}
+
+class Service: ServiceProtocol {
     var cancelBag: Set<AnyCancellable> = .init()
 }

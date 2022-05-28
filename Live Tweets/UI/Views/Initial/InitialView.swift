@@ -19,7 +19,7 @@ struct InitialView: RootView {
 
 struct InitialView_Previews: PreviewProvider {
     static var previews: some View {
-        InitialView(viewModel: .init(data: .init(), router: nil))
+        InitialView(viewModel: .init(input: .init(), output: .init(), dependencies: .init()))
     }
 }
 
