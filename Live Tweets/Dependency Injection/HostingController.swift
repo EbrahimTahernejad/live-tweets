@@ -20,10 +20,10 @@ protocol HostController: UIViewController {
 class HostingController<T: RootView>: UIHostingController<AnyView>, HostController {
     @Published var state: HostingControllerState = .notLoaded
     
-    var insideView: T
+    var viewModel: T.ViewModel
     
     init(rootView: T, viewProvider: ViewProviderProtocol) {
-        self.insideView = rootView
+        viewModel = rootView.viewModel
         super.init(rootView: AnyView(rootView.environment(\.locale, Locale(identifier: viewProvider.dependencies.languageService?.language.rawValue ?? "en")).environment(\.viewProvider, viewProvider)))
     }
     
@@ -35,7 +35,7 @@ class HostingController<T: RootView>: UIHostingController<AnyView>, HostControll
         super.viewDidAppear(animated)
         if state != .loaded {
             state = .loaded
-            insideView.viewModel.didLoad()
+            viewModel.didLoad()
         }
     }
 }

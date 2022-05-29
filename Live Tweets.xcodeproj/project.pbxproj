@@ -10,6 +10,9 @@
 		031EA3F92841868F001B0E13 /* ViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031EA3F82841868F001B0E13 /* ViewProvider.swift */; };
 		031EA3FB28418748001B0E13 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031EA3FA28418748001B0E13 /* Dependencies.swift */; };
 		031EA3FE284189A2001B0E13 /* LanguageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 031EA3FD284189A2001B0E13 /* LanguageService.swift */; };
+		0324A5E12843CB790076AA0D /* APIRulesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A5E02843CB790076AA0D /* APIRulesService.swift */; };
+		0324A5E42843CD540076AA0D /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A5E32843CD540076AA0D /* Rules.swift */; };
+		0324A5E82843DE0D0076AA0D /* EndPoint+APIMethod+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A5E72843DE0D0076AA0D /* EndPoint+APIMethod+Request.swift */; };
 		033358AA283E73B4008F29FB /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358A9283E73B4008F29FB /* InitialView.swift */; };
 		033358AC283E73C0008F29FB /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358AB283E73C0008F29FB /* InitialViewModel.swift */; };
 		033358B0283E7925008F29FB /* TweetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358AF283E7925008F29FB /* TweetListView.swift */; };
@@ -41,6 +44,9 @@
 		031EA3F82841868F001B0E13 /* ViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProvider.swift; sourceTree = "<group>"; };
 		031EA3FA28418748001B0E13 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		031EA3FD284189A2001B0E13 /* LanguageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageService.swift; sourceTree = "<group>"; };
+		0324A5E02843CB790076AA0D /* APIRulesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRulesService.swift; sourceTree = "<group>"; };
+		0324A5E32843CD540076AA0D /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
+		0324A5E72843DE0D0076AA0D /* EndPoint+APIMethod+Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndPoint+APIMethod+Request.swift"; sourceTree = "<group>"; };
 		033358A5283E4AED008F29FB /* Main.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.template.xcconfig; sourceTree = "<group>"; };
 		033358A6283E622B008F29FB /* Main.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.xcconfig; sourceTree = "<group>"; };
 		033358A7283E6E5A008F29FB /* Live-Tweets-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Live-Tweets-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -100,6 +106,22 @@
 				031EA3FD284189A2001B0E13 /* LanguageService.swift */,
 			);
 			path = Language;
+			sourceTree = "<group>";
+		};
+		0324A5DF2843CB620076AA0D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0324A5E02843CB790076AA0D /* APIRulesService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		0324A5E22843CD330076AA0D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0324A5E32843CD540076AA0D /* Rules.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		033358A3283E4AA6008F29FB /* Resources */ = {
@@ -178,6 +200,7 @@
 				031EA3FC2841875F001B0E13 /* Dependency Injection */,
 				033358A3283E4AA6008F29FB /* Resources */,
 				036C2D79283BFFD000C9626F /* UI */,
+				0324A5E22843CD330076AA0D /* Models */,
 				036C2D64283BFE1100C9626F /* Services */,
 				036C2D50283BFC5800C9626F /* Helpers */,
 				036C2D4F283BFBFA00C9626F /* BaseUI */,
@@ -203,6 +226,7 @@
 				036C2D5C283BFD4100C9626F /* String+CamelToKebab.swift */,
 				036C2D60283BFD9F00C9626F /* String+Localization.swift */,
 				036C2D62283BFDE000C9626F /* UIApplication+TopController.swift */,
+				0324A5E72843DE0D0076AA0D /* EndPoint+APIMethod+Request.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -221,6 +245,7 @@
 		036C2D64283BFE1100C9626F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				0324A5DF2843CB620076AA0D /* API */,
 				031EA4012842D484001B0E13 /* Language */,
 				036C2D68283BFED600C9626F /* Router */,
 			);
@@ -354,7 +379,10 @@
 				033358AC283E73C0008F29FB /* InitialViewModel.swift in Sources */,
 				031EA3F92841868F001B0E13 /* ViewProvider.swift in Sources */,
 				036C2D57283BFCBF00C9626F /* Image+App.swift in Sources */,
+				0324A5E82843DE0D0076AA0D /* EndPoint+APIMethod+Request.swift in Sources */,
+				0324A5E12843CB790076AA0D /* APIRulesService.swift in Sources */,
 				033358B5283EA8D6008F29FB /* SearchBarComponent.swift in Sources */,
+				0324A5E42843CD540076AA0D /* Rules.swift in Sources */,
 				036C2D63283BFDE000C9626F /* UIApplication+TopController.swift in Sources */,
 				036C2D4C283BFB9300C9626F /* AppDelegate.swift in Sources */,
 				036C2D74283BFF4300C9626F /* ViewModel.swift in Sources */,

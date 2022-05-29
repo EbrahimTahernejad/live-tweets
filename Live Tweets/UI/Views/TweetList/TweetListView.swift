@@ -13,11 +13,11 @@ struct TweetListView: RootView {
     
     var body: some View {
         ZStack(alignment: .top) {
-            HStack {
-                TextField("Hello", text: $viewModel.filterText).textFieldStyle(.plain).fontStyle(.normal)
-            }.frame(maxHeight: 100)
-            
-            
+            VStack {
+                HStack {
+                    TextField("Hello", text: $viewModel.filterText).textFieldStyle(.plain).fontStyle(.normal)
+                }
+            }.frame(maxHeight: .infinity, alignment: .top)
         }
         
     }

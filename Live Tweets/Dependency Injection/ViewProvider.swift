@@ -46,6 +46,9 @@ class ViewProvider: ViewProviderProtocol {
         if inject.contains(.languageService) {
             dependencies.languageService = self.dependencies.languageService
         }
+        if inject.contains(.apiRulesService) {
+            dependencies.apiRulesService = self.dependencies.apiRulesService
+        }
         return dependencies
     }
     

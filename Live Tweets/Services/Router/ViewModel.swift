@@ -13,12 +13,12 @@ protocol BaseViewModelProtocol: ObservableObject {
     associatedtype Input: ViewModelInput
     associatedtype Output: ViewModelOutput
     func didLoad()
-    static var inject: DependencyOptions { get set }
+    static var inject: DependencyOptions { get }
     init(input: Input, output: Output, dependencies: Dependencies)
 }
 
 class AnyViewModel {
-    static var inject: DependencyOptions = []
+    class var inject: DependencyOptions { [] }
     var cancelBag: Set<AnyCancellable> = .init()
     let dependencies: Dependencies
     init(dependencies: Dependencies) {
