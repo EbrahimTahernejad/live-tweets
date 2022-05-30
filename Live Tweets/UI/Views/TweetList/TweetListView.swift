@@ -16,8 +16,22 @@ struct TweetListView: RootView {
             VStack {
                 HStack {
                     TextField("Hello", text: $viewModel.filterText).textFieldStyle(.plain).fontStyle(.normal)
+                    Button {
+                        viewModel.dependencies.apiRulesService?.reset(rules: [Rule.init(value: viewModel.filterText, tag: nil, id: nil)]).sink(receiveCompletion: { comp in
+                            switch comp {
+                            case .failure(let e):
+                                print("F bruh \(e)")
+                            case .finished:
+                                print("finished")
+                            }
+                        }, receiveValue: { val in
+                            print("Val \(val)")
+                        }).store(in: &viewModel.cancelBag)
+                    } label: {
+                        Text("Do Stuff")
+                    }
                 }
-            }.frame(maxHeight: .infinity, alignment: .top)
+            }.frame(maxHeight: 100, alignment: .top)
         }
         
     }

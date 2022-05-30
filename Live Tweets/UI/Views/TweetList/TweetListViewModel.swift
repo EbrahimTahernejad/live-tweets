@@ -11,6 +11,10 @@ import Combine
 extension TweetListView {
     @MainActor class ViewModel: BaseViewModel<ViewModelInput.Empty, ViewModelOutput.Empty> {
         
+        override class var inject: DependencyOptions {
+            [.router, .apiRulesService]
+        }
+        
         @Published var filterText: String = ""
         
         required init(input: Input, output: Output, dependencies: Dependencies) {

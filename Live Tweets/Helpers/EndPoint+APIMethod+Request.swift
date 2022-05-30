@@ -56,7 +56,11 @@ extension EndPoint {
             let encoded = params[k]?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             urlStr = urlStr.replacingOccurrences(of: "{\(k)}", with: encoded)
         }
+        print("\(urlStr)")
         var req = URLRequest(url: URL(string: urlStr)!)
+        
+        // Set the method
+        req.httpMethod = method.rawValue
         
         // Set headers
         guard let bearerToken = Bundle.main.object(forInfoDictionaryKey: "TWITTER_BEARER_TOKEN") as? String
@@ -71,13 +75,20 @@ extension EndPoint {
         
         // Set body if present
         if let body = body {
-            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
             req.httpBody = body
+            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        } else {
+            req.httpBody = nil
         }
         
         // Finish up
         return URLSession.shared.dataTaskPublisher(for: req).mapError({ $0 as Error }).tryMap({ response in
-            try JSONDecoder().decode(Res.self, from: response.data)
+            // Handle empty responses
+            if let response = EmptyResponse() as? Res {
+                return response
+            }
+            // Decode the JSON reponse
+            return try JSONDecoder().decode(Res.self, from: response.data)
         }).eraseToAnyPublisher()
     }
     

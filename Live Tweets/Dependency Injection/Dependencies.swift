@@ -14,6 +14,12 @@ struct Dependencies {
     weak var apiRulesService: APIRulesServiceProtocol?
 }
 
+struct DependenciesStrong {
+    var languageService: LanguageServiceProtocol?
+    var router: RouterProtocol?
+    var apiRulesService: APIRulesServiceProtocol?
+}
+
 
 struct DependencyOptions: OptionSet {
     var rawValue: Int64

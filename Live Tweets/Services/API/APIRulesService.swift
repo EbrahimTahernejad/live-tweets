@@ -9,21 +9,19 @@ import Combine
 import Foundation
 
 enum APIRulesServiceURLs: EndPoint {
-    case add = "POST~tweets/search/stream/rules"
+    case edit = "POST~tweets/search/stream/rules"
     case get = "GET~tweets/search/stream/rules"
-    case delete = "DELETE~tweets/search/stream/rules"
 }
 
 class APIRulesService: Service, APIRulesServiceProtocol {
     
     func create(rules: [Rule]) -> AnyPublisher<RulesData, Error> {
-        return APIRulesServiceURLs.add.request.send(body: RulesAdd(add: rules))
+        return APIRulesServiceURLs.edit.request.send(body: RulesAdd(add: rules))
     }
     
     func reset(rules: [Rule]) -> AnyPublisher<RulesData, Error> {
-        return deleteAll().flatMap({ [unowned self] _ in
-            return create(rules: rules)
-        }).eraseToAnyPublisher()
+        return deleteAll().map{_ in return rules}
+            .flatMap(create).eraseToAnyPublisher()
     }
     
     func getAll() -> AnyPublisher<RulesData, Error> {
@@ -31,13 +29,14 @@ class APIRulesService: Service, APIRulesServiceProtocol {
     }
     
     func delete(rules: [Rule]) -> AnyPublisher<EmptyResponse, Error> {
-        return APIRulesServiceURLs.delete.request.send(
+        return APIRulesServiceURLs.edit.request.send(
             body: RulesDelete(delete: .init(ids: rules.compactMap({ $0.id })))
         )
     }
     
     func deleteAll() -> AnyPublisher<EmptyResponse, Error> {
-        getAll().map{$0.data}.flatMap(delete).eraseToAnyPublisher()
+        return getAll().map{$0.data}
+            .flatMap(delete).eraseToAnyPublisher()
     }
     
 }

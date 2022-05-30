@@ -13,6 +13,7 @@
 		0324A5E12843CB790076AA0D /* APIRulesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A5E02843CB790076AA0D /* APIRulesService.swift */; };
 		0324A5E42843CD540076AA0D /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A5E32843CD540076AA0D /* Rules.swift */; };
 		0324A5E82843DE0D0076AA0D /* EndPoint+APIMethod+Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A5E72843DE0D0076AA0D /* EndPoint+APIMethod+Request.swift */; };
+		0324A5EA28444B310076AA0D /* SearchBarComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A5E928444B310076AA0D /* SearchBarComponentModel.swift */; };
 		033358AA283E73B4008F29FB /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358A9283E73B4008F29FB /* InitialView.swift */; };
 		033358AC283E73C0008F29FB /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358AB283E73C0008F29FB /* InitialViewModel.swift */; };
 		033358B0283E7925008F29FB /* TweetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033358AF283E7925008F29FB /* TweetListView.swift */; };
@@ -47,6 +48,7 @@
 		0324A5E02843CB790076AA0D /* APIRulesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRulesService.swift; sourceTree = "<group>"; };
 		0324A5E32843CD540076AA0D /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		0324A5E72843DE0D0076AA0D /* EndPoint+APIMethod+Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EndPoint+APIMethod+Request.swift"; sourceTree = "<group>"; };
+		0324A5E928444B310076AA0D /* SearchBarComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarComponentModel.swift; sourceTree = "<group>"; };
 		033358A5283E4AED008F29FB /* Main.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.template.xcconfig; sourceTree = "<group>"; };
 		033358A6283E622B008F29FB /* Main.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.xcconfig; sourceTree = "<group>"; };
 		033358A7283E6E5A008F29FB /* Live-Tweets-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Live-Tweets-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -173,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				033358B4283EA8D6008F29FB /* SearchBarComponent.swift */,
+				0324A5E928444B310076AA0D /* SearchBarComponentModel.swift */,
 			);
 			path = SearchBar;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				036C2D4E283BFBB700C9626F /* SceneDelegate.swift in Sources */,
 				033358B0283E7925008F29FB /* TweetListView.swift in Sources */,
 				036C2D55283BFC9900C9626F /* FontStyles.swift in Sources */,
+				0324A5EA28444B310076AA0D /* SearchBarComponentModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

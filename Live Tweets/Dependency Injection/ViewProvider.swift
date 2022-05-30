@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 protocol ViewProviderProtocol {
-    var dependencies: Dependencies { get }
-    init(dependencies: Dependencies)
+    var dependencies: DependenciesStrong { get }
+    init(dependencies: DependenciesStrong)
     func update(router: Router)
     func provide<ViewType: RootView>(with ContentView: ViewType.Type, input: ViewType.ViewModel.Input, output: ViewType.ViewModel.Output) -> ViewType
 }
@@ -28,9 +28,9 @@ extension EnvironmentValues {
 
 class ViewProvider: ViewProviderProtocol {
     
-    private(set) var dependencies: Dependencies
+    private(set) var dependencies: DependenciesStrong
     
-    required init(dependencies: Dependencies) {
+    required init(dependencies: DependenciesStrong) {
         self.dependencies = dependencies
     }
     

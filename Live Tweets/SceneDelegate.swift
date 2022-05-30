@@ -7,6 +7,10 @@
 
 import UIKit
 
+struct ServicesSingleton {
+    
+}
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -18,7 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let viewProvider = ViewProvider(dependencies: Dependencies.init(languageService: LanguageService(), router: nil, apiRulesService: APIRulesService()))
+        let viewProvider = ViewProvider(dependencies: .init(languageService: LanguageService(), router: nil, apiRulesService: APIRulesService()))
         let router = Router(with: InitialView.self, input: .init(), output: .init(), viewProvider: viewProvider)
         window.rootViewController = router.bottomNavigationController
         self.window = window

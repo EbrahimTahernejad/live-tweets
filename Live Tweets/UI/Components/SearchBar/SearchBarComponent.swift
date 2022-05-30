@@ -8,3 +8,10 @@
 import SwiftUI
 import Combine
 
+class SearchBarComponent: RootView {
+
+    
+    typealias Body = <#type#>
+    
+    
+}
