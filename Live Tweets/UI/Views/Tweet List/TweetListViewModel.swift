@@ -42,11 +42,17 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
     override func didLoad() {
         super.didLoad()
         
+        // Check if searchbar should be fullscreen
         filterResults
             .map { $0.count == 0 }
             .bind(to: searchBarFullScreen)
             .disposed(by: disposeBag)
         
+        // Check if our filter has more than 3 chars
+        // Then wait 1.3 seconds to see if it changes again
+        // If not we'll set a new rule for stream
+        // Then connect to the stream if not, or disconnect
+        // If the length is too short
         filterText
             .filter { $0.count > 3 }
             .debounce(.milliseconds(1300), scheduler: MainScheduler.instance)
@@ -55,6 +61,7 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
             .bind(onNext: handleStreamState)
             .disposed(by: disposeBag)
         
+        // Append stream output to filterResults
         streamOutput
             .map { [weak self] out in
                 return out + (self?.filterResults.value ?? [])
@@ -115,7 +122,6 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
         }
         
         var after: [TweetCellType] = []
-        
         // Check if there is any qouted tweet to add
         if
             let ref = tweet.referenced_tweets?.first(where: { $0.type == .quoted }),
