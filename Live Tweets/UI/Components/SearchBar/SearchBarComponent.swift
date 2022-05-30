@@ -8,10 +8,17 @@
 import SwiftUI
 import Combine
 
-class SearchBarComponent: RootView {
-
+struct SearchBarComponent: RootView {
     
-    typealias Body = <#type#>
+    @ObservedObject var viewModel: ViewModel
+    
+    var body: some View {
+        VStack {
+            HStack {
+                TextField("Hello", text: $viewModel.filterText).textFieldStyle(.plain).fontStyle(.normal)
+            }
+        }.frame(maxHeight: 100, alignment: .top)
+    }
     
     
 }

@@ -53,6 +53,6 @@ class ViewProvider: ViewProviderProtocol {
     }
     
     func provide<ViewType: RootView>(with ContentView: ViewType.Type, input: ViewType.ViewModel.Input, output: ViewType.ViewModel.Output) -> ViewType {
-        ViewType.init(viewModel: .init(input: input, output: output, dependencies: buildDependencies(ViewType.ViewModel.inject)))
+        return ViewType.init(viewModel: .init(input: input, output: output, dependencies: buildDependencies(ViewType.ViewModel.inject)))
     }
 }

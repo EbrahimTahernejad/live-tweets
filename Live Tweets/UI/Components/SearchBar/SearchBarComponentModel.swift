@@ -5,22 +5,34 @@
 //  Created by Ebrahim Tahernejad on 3/9/1401 AP.
 //
 
-import Foundation
+import Combine
 
 
 extension SearchBarComponent {
     
-    struct Input: ViewModelInput {
-        
+    struct VMInput: ViewModelInput {
+        let fullScreen: AnyPublisher<Bool, Never>
     }
     
-    struct Output: ViewModelOutput {
-        
+    struct VMOutput: ViewModelOutput {
+        let filterText: PassthroughSubject<String, Never>
     }
     
-    @MainActor class ViewModel: BaseViewModel<Input, Output> {
+    class ViewModel: BaseViewModel<VMInput, VMOutput> {
         
+        @Published var fullScreen: Bool = false
+        @Published var filterText: String = ""
         
+        required init(input: Input, output: Output, dependencies: Dependencies) {
+            super.init(input: input, output: output, dependencies: dependencies)
+            
+            print("VMM")
+            
+            input.fullScreen.assign(to: &$fullScreen)
+            $filterText.sink { [output] text in
+                output.filterText.send(text)
+            }.store(in: &cancelBag)
+        }
         
         override func didLoad() {
             
