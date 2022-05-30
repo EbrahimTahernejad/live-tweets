@@ -38,6 +38,7 @@ class APIStreamService: Service, APIStreamServiceProtocol {
     
     @discardableResult func connect() -> Bool {
         guard dataTask == nil else { return false }
+        print("Connect Fired")
         output.accept(.connecting)
         let urlRequest =
             APIStreamServiceURLs
@@ -74,16 +75,26 @@ extension APIStreamService: URLSessionDataDelegate {
     }
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+        print("DATA: ---------------------------")
+        print(String(data: data, encoding: .utf8) ?? "EMPTY")
+        print("---------------------------------")
         guard
             dataTask.state != .canceling,
             String(data: data, encoding: .utf8)?
                 .trimmingCharacters(in: .whitespacesAndNewlines)
-                .count ?? 0 > 0,
-            let out = try? JSONDecoder().decode(Tweet.self, from: data)
+                .count ?? 0 > 0
         else {
             return
         }
-        output.accept(.data(out))
+        do {
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+            let out = try decoder.decode(Tweet.self, from: data)
+            output.accept(.data(out))
+        } catch {
+            print(error)
+        }
+        
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

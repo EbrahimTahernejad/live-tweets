@@ -9,15 +9,20 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+protocol RangeItem {
+    var start: Int { get }
+    var end: Int { get }
+}
+
 struct Tweet: Codable {
-    let data: [TweetData]
+    let data: TweetData
     let includes: TweetIncludes?
 }
 
 struct TweetData: Codable {
     let entities: TweetEntities?
     let attachments: TweetAttachments?
-    let public_metrics: TweetMetrics
+    let public_metrics: TweetMetrics?
     let referenced_tweets: [TweetReference]?
     let text: String
     let source: String?
@@ -36,10 +41,10 @@ struct TweetReference: Codable {
 }
 
 struct TweetMetrics: Codable {
-    let retweet_count: Int
-    let reply_count: Int
-    let like_count: Int
-    let quote_count: Int
+    let retweet_count: Int?
+    let reply_count: Int?
+    let like_count: Int?
+    let quote_count: Int?
 }
 
 struct TweetAttachments: Codable {
@@ -54,19 +59,19 @@ struct TweetEntities: Codable {
     let mentions: [TweetMention]?
 }
 
-struct TweetTag: Codable {
+struct TweetTag: Codable, RangeItem {
     let start: Int
     let end: Int
     let tag: String
 }
 
-struct TweetMention: Codable {
+struct TweetMention: Codable, RangeItem {
     let start: Int
     let end: Int
     let username: String
 }
 
-struct TweetURL: Codable {
+struct TweetURL: Codable, RangeItem {
     let start: Int
     let end: Int
     let url: String
@@ -105,7 +110,7 @@ struct TweetUser: Codable {
     let name: String
     let username: String
     let profile_image_url: String
-    let description: String
+    let description: String?
     let entities: TweetEntities?
     let verified: Bool
     let url: String
@@ -120,11 +125,11 @@ struct TweetIncludes: Codable {
 
 struct TweetMedia: Codable {
     struct MediaMetrics: Codable {
-        let viewer_count: Int
+        let viewer_count: Int?
     }
     
     enum MediaType: String, Codable {
-        case video, photo
+        case video, photo, animated_gif
     }
     
     struct MediaVariant: Codable {

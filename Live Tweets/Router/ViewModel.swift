@@ -37,6 +37,8 @@ class AnyViewModel {
 }
 
 class BaseViewModel<Input: ViewModelInput, Output: ViewModelOutput>: AnyViewModel, BaseViewModelProtocol {
+    let input: Input
+    let output: Output
     func didLoad() {
         
     }
@@ -44,6 +46,8 @@ class BaseViewModel<Input: ViewModelInput, Output: ViewModelOutput>: AnyViewMode
         
     }
     required init(input: Input, output: Output, dependencies: Dependencies) {
+        self.input = input
+        self.output = output
         super.init(dependencies: dependencies)
     }
 }

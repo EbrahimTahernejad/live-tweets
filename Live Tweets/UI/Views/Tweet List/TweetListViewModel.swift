@@ -8,19 +8,38 @@
 import Foundation
 import RxCocoa
 import RxSwift
-
-
-struct DecomposedTweet {
-    let data: TweetData
-    let includes: TweetIncludes?
-}
+import Differentiator
 
 enum TweetCellType {
-    case normal(tweet: DecomposedTweet, retweeter: TweetUser?)
-    case quoted(tweet: DecomposedTweet)
+    
+    case normal(tweet: Tweet, retweeter: TweetUser?)
+    case quoted(tweet: Tweet)
     case url(_ url: TweetURL)
     case media(_ media: TweetMedia)
     case poll(_ poll: TweetPoll)
+}
+
+extension TweetCellType: IdentifiableType, Equatable {
+    
+    typealias Identity = String
+    var identity: String {
+        switch self {
+        case .normal(let tweet, _):
+            return "N_" + tweet.data.id
+        case .quoted(let tweet):
+            return "Q_" + tweet.data.id
+        case .url(let url):
+            return "U_" + url.url
+        case .media(let media):
+            return "M_" + media.media_key
+        case .poll(let poll):
+            return "P_" + poll.id
+        }
+    }
+    
+    static func == (lhs: TweetCellType, rhs: TweetCellType) -> Bool {
+        return lhs.identity == rhs.identity
+    }
 }
 
 
@@ -33,8 +52,8 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
     let searchBarFullScreen: BehaviorRelay<Bool> = .init(value: true)
     let filterText: BehaviorRelay<String> = .init(value: "")
     
-    private let filterResults: BehaviorRelay<[DecomposedTweet]> = .init(value: [])
-    private let streamOutput: PublishRelay<[DecomposedTweet]> = .init()
+    private let filterResults: BehaviorRelay<[Tweet]> = .init(value: [])
+    private let streamOutput: PublishRelay<[Tweet]> = .init()
     let data: PublishRelay<[[TweetCellType]]> = .init()
     
     let streamEnabled: BehaviorRelay<Bool> = .init(value: false)
@@ -48,15 +67,20 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
             .bind(to: searchBarFullScreen)
             .disposed(by: disposeBag)
         
+        streamOutput.bind { lol in
+            print(lol)
+        }.disposed(by: disposeBag)
+        
         // Check if our filter has more than 3 chars
         // Then wait 1.3 seconds to see if it changes again
         // If not we'll set a new rule for stream
         // Then connect to the stream if not, or disconnect
         // If the length is too short
         filterText
-            .filter { $0.count > 3 }
             .debounce(.milliseconds(1300), scheduler: MainScheduler.instance)
-            .flatMapLatest(doFilter)
+            .distinctUntilChanged()
+            .filter { $0.count > 3 }
+            .flatMap(doFilter)
             .map { _ in return true }
             .bind(onNext: handleStreamState)
             .disposed(by: disposeBag)
@@ -83,19 +107,17 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
                 self?.streamEnabled.accept(false)
                 print("API Disconnected")
             case .data(let data):
-                self?.streamOutput.accept(data.data.map({ d in
-                    return DecomposedTweet(data: d, includes: data.includes)
-                }))
+                self?.streamOutput.accept([data])
             }
         }.disposed(by: disposeBag)
         
     }
     
-    private func transform(tweets: [DecomposedTweet]) -> [[TweetCellType]] {
+    private func transform(tweets: [Tweet]) -> [[TweetCellType]] {
         return tweets.map(transform(tweet:))
     }
     
-    private func transform(tweet: DecomposedTweet) -> [TweetCellType] {
+    private func transform(tweet: Tweet) -> [TweetCellType] {
         let includes = tweet.includes
         // Make it var so we can recursively
         // search for the original tweet (if retweeted)
@@ -164,7 +186,7 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
         }
         
         // Return the "section"
-        return before + [.normal(tweet: DecomposedTweet(data: tweet, includes: includes), retweeter: retweeter)] + after
+        return before + [.normal(tweet: Tweet(data: tweet, includes: includes), retweeter: retweeter)] + after
     }
     
     private func transform(medias: [TweetMedia]) -> [TweetCellType] {

@@ -12,6 +12,7 @@ protocol RootViewProtocol: UIView {
     associatedtype ViewModel: BaseViewModelProtocol
     var viewModel: ViewModel { get }
     var viewProvider: ViewProviderProtocol? { get }
+    var controller: UIViewController? { get set }
     init(viewModel: ViewModel, viewProvider: ViewProviderProtocol)
 }
 
@@ -23,18 +24,29 @@ protocol RootViewSetupProtocol: RootViewProtocol {
 
 class RootView<ViewModel: BaseViewModelProtocol>: UIView, RootViewProtocol, RootViewSetupProtocol {
     
+    weak var controller: UIViewController? {
+        didSet {
+            if let controller = controller {
+                setup(controller: controller)
+            }
+        }
+    }
     weak var viewProvider: ViewProviderProtocol?
     let viewModel: ViewModel
     
     let disposeBag = DisposeBag()
     
     required init(viewModel: ViewModel, viewProvider: ViewProviderProtocol) {
+        self.viewProvider = viewProvider
         self.viewModel = viewModel
         super.init(frame: .zero)
         
-        translatesAutoresizingMaskIntoConstraints = false
         setup()
         viewModel.didLoad()
+    }
+    
+    func setup(controller: UIViewController) {
+        
     }
     
     private func setupTapGesture() {
@@ -71,16 +83,21 @@ class RootView<ViewModel: BaseViewModelProtocol>: UIView, RootViewProtocol, Root
 }
 
 class RootCellView<ViewModel: BaseViewModelProtocol>: UITableViewCell, RootViewProtocol, RootViewSetupProtocol {
+    weak var controller: UIViewController?
     weak var viewProvider: ViewProviderProtocol?
     let viewModel: ViewModel
+    
+    class var reuseIdentifier: String {
+        return "RootCellView"
+    }
     
     let disposeBag: DisposeBag = DisposeBag()
     
     required init(viewModel: ViewModel, viewProvider: ViewProviderProtocol) {
+        self.viewProvider = viewProvider
         self.viewModel = viewModel
-        super.init(frame: .zero)
+        super.init(style: .default, reuseIdentifier: Self.reuseIdentifier)
         
-        translatesAutoresizingMaskIntoConstraints = false
         setup()
         viewModel.didLoad()
     }

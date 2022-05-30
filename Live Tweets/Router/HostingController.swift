@@ -19,16 +19,11 @@ class HostingController<ViewType: RootViewProtocol>: UIViewController, HostingCo
     init(rootView: ViewType) {
         self.rootView = rootView
         super.init(nibName: nil, bundle: nil)
+        rootView.controller = self
     }
     
     override func loadView() {
         view = rootView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        rootView.viewModel.didLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
