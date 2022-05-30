@@ -23,7 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 DependenciesStrong(
                     languageService: LanguageService(),
                     router: nil,
-                    apiRulesService: APIRulesService()
+                    apiRulesService: APIRulesService(),
+                    apiStreamService: APIStreamService()
                 )
         )
         router = Router(with: InitialView.self, input: .init(), output: .init(), viewProvider: viewProvider)

@@ -13,12 +13,11 @@ enum APIStreamServiceURLs: EndPoint {
     case stream = "GET~tweets/search/stream?tweet.fields={tweet_fields}&expansions={expansions}&user.fields={user_fields}"
 }
 
+enum APIStreamServiceOutput {
+    case disconnected, connecting, data(_ data: Data)
+}
 
-class APIStreamService: Service {
-    
-    enum Output {
-        case disconnected, connecting, data(_ data: Data)
-    }
+class APIStreamService: Service, APIStreamServiceProtocol {
     
     private let dispatchQueue = DispatchQueue(label: "com.Snapp.background")
     
@@ -35,7 +34,7 @@ class APIStreamService: Service {
     
     private var dataTask: URLSessionDataTask?
     
-    let output: PublishRelay<Output> = .init()
+    let output: PublishRelay<APIStreamServiceOutput> = .init()
     
     @discardableResult
     func connect() -> Bool {
@@ -50,6 +49,12 @@ class APIStreamService: Service {
         dataTask?.cancel()
     }
     
+}
+
+protocol APIStreamServiceProtocol: ServiceProtocol {
+    var output: PublishRelay<APIStreamServiceOutput> { get }
+    func connect() -> Bool
+    func disconnect()
 }
 
 extension APIStreamService: URLSessionDataDelegate {

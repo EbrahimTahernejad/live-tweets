@@ -40,6 +40,14 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
             .bind(to: streamEnabled)
             .disposed(by: disposeBag)
         
+        streamEnabled
+            .bind(onNext: handleStreamState)
+            .disposed(by: disposeBag)
+        
+    }
+    
+    func handleStreamState(_ enabled: Bool) {
+        
     }
     
     func doFilter(_ text: String) -> Observable<RulesData> {

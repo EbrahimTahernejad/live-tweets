@@ -39,7 +39,7 @@ class APIRulesService: Service, APIRulesServiceProtocol {
     
 }
 
-protocol APIRulesServiceProtocol: AnyObject {
+protocol APIRulesServiceProtocol: ServiceProtocol {
     func create(rules: [Rule]) -> Observable<RulesData>
     func reset(rules: [Rule]) -> Observable<RulesData>
     func getAll() -> Observable<RulesData>
