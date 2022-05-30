@@ -47,7 +47,7 @@ class APIStreamService: Service, APIStreamServiceProtocol {
                     "tweet_fields": "attachments,author_id,context_annotations,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld",
                     "expansions": "author_id,referenced_tweets.id,attachments.media_keys,attachments.poll_ids",
                     "user_fields": "created_at,profile_image_url,verified,url",
-                    "media_fields": "duration_ms,height,media_key,preview_image_url,public_metrics,type,url,width,alt_text",
+                    "media_fields": "duration_ms,height,media_key,preview_image_url,public_metrics,type,url,width,alt_text,variants",
                     "poll_fields": "end_datetime,voting_status,duration_minutes"
                 ])
         dataTask = urlSession.dataTask(with: urlRequest)

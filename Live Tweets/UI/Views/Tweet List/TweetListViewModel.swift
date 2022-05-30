@@ -10,6 +10,20 @@ import RxCocoa
 import RxSwift
 
 
+struct DecomposedTweet {
+    let data: TweetData
+    let includes: TweetIncludes?
+}
+
+enum TweetCellType {
+    case normal(tweet: DecomposedTweet, retweeter: TweetUser?)
+    case quoted(tweet: DecomposedTweet)
+    case url(_ url: TweetURL)
+    case media(_ media: TweetMedia)
+    case poll(_ poll: TweetPoll)
+}
+
+
 class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
     
     override class var inject: DependencyOptions {
@@ -18,8 +32,10 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
     
     let searchBarFullScreen: BehaviorRelay<Bool> = .init(value: true)
     let filterText: BehaviorRelay<String> = .init(value: "")
-    let filterResults: BehaviorRelay<[Tweet]> = .init(value: [])
-    let streamOutput: PublishRelay<[Tweet]> = .init()
+    
+    private let filterResults: BehaviorRelay<[DecomposedTweet]> = .init(value: [])
+    private let streamOutput: PublishRelay<[DecomposedTweet]> = .init()
+    let data: PublishRelay<[[TweetCellType]]> = .init()
     
     let streamEnabled: BehaviorRelay<Bool> = .init(value: false)
     
@@ -46,6 +62,11 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
             .bind(to: filterResults)
             .disposed(by: disposeBag)
         
+        filterResults
+            .map(transform(tweets:))
+            .bind(to: data)
+            .disposed(by: disposeBag)
+        
         dependencies.apiStreamService?.output.bind { [weak self] output in
             switch output {
             case .connecting:
@@ -56,11 +77,94 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
                 print("API Disconnected")
             case .data(let data):
                 self?.streamOutput.accept(data.data.map({ d in
-                    return Tweet(data: [d], includes: data.includes)
+                    return DecomposedTweet(data: d, includes: data.includes)
                 }))
             }
         }.disposed(by: disposeBag)
         
+    }
+    
+    private func transform(tweets: [DecomposedTweet]) -> [[TweetCellType]] {
+        return tweets.map(transform(tweet:))
+    }
+    
+    private func transform(tweet: DecomposedTweet) -> [TweetCellType] {
+        let includes = tweet.includes
+        // Make it var so we can recursively
+        // search for the original tweet (if retweeted)
+        var tweet = tweet.data
+        // Find the retweeter if exists
+        let retweeter =
+            tweet
+                .referenced_tweets?
+                .contains(where: { $0.type == .retweeted }) ?? false
+            ?
+            includes?
+                .users?
+                .first(where: { $0.id == tweet.author_id })
+            :
+            nil
+        // Search for the original tweet
+        while
+            // If there is no tweet related by retweeting,
+            // We've found the original tweet
+            let ref = tweet.referenced_tweets?.first(where: { $0.type == .retweeted }),
+            let newTweet = includes?.tweets?.first(where: { $0.id == ref.id })
+        {
+            tweet = newTweet
+        }
+        
+        var after: [TweetCellType] = []
+        
+        // Check if there is any qouted tweet to add
+        if
+            let ref = tweet.referenced_tweets?.first(where: { $0.type == .quoted }),
+            let found = includes?.tweets?.first(where: { $0.id == ref.id })
+        {
+            after.append(
+                .quoted(tweet: .init(data: found, includes: includes))
+            )
+        }
+        
+        // Check if there are any medias and show them
+        var before: [TweetCellType] = []
+        if
+            let medias = tweet.attachments?.media_keys?
+                .compactMap({ key in
+                    return includes?.media?.first(where: { $0.media_key == key })
+                })
+        {
+            before.append(contentsOf: transform(medias: medias))
+        }
+        
+        // Check for first url that has metadata
+        // And append it
+        if
+            let url = tweet.entities?.urls?.first(where: { $0.title != nil })
+        {
+            before.append(.url(url))
+        }
+        
+        // Having no retweeter means the current tweet
+        // Might not be the first one
+        if
+            retweeter != nil,
+            let ref = tweet.referenced_tweets?.first(where: { $0.type == .replied_to }),
+            let parent = includes?.tweets?.first(where: { $0.id == ref.id })
+        {
+            before.append(
+                contentsOf: transform(tweet: .init(data: parent, includes: includes))
+            )
+        }
+        
+        // Return the "section"
+        return before + [.normal(tweet: DecomposedTweet(data: tweet, includes: includes), retweeter: retweeter)] + after
+    }
+    
+    private func transform(medias: [TweetMedia]) -> [TweetCellType] {
+        // For now let's return the first one only
+        guard let media = medias.first else { return [] }
+        return [.media(media)]
     }
     
     private func handleStreamState(_ enabled: Bool) {

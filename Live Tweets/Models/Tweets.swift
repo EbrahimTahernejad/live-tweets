@@ -21,7 +21,7 @@ struct TweetData: Codable {
     let referenced_tweets: [TweetReference]?
     let text: String
     let source: String?
-    let createdAt: Date
+    let created_at: Date
     let author_id: String
     let id: String
 }
@@ -70,6 +70,9 @@ struct TweetURL: Codable {
     let start: Int
     let end: Int
     let url: String
+    let display_url: String?
+    let title: String?
+    let description: String?
     let images: [TweetURLImage]?
 }
 
@@ -124,11 +127,17 @@ struct TweetMedia: Codable {
         case video, photo
     }
     
+    struct MediaVariant: Codable {
+        let url: String
+    }
+    
     let width: Int
     let height: Int
     let type: MediaType
     let url: String?
     let preview_image_url: String?
-    let public_metrics: MediaMetrics
+    let media_key: String
+    let public_metrics: MediaMetrics?
+    let variants: [MediaVariant]?
 }
 
