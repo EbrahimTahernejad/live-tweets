@@ -25,6 +25,20 @@ class RootView<ViewModel: BaseViewModelProtocol>: UIView, RootViewProtocol {
     }
     
     func setup() {
+        loadSubviews()
+        layout()
+        setupViewModel()
+    }
+    
+    func loadSubviews() {
+        
+    }
+    
+    func layout() {
+        
+    }
+    
+    func setupViewModel() {
         
     }
     
