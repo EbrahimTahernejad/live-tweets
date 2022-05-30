@@ -21,6 +21,11 @@ class RootView<ViewModel: BaseViewModelProtocol>: UIView, RootViewProtocol {
     required init(viewModel: ViewModel, viewProvider: ViewProviderProtocol) {
         self.viewModel = viewModel
         super.init(frame: .zero)
+        setup()
+    }
+    
+    func setup() {
+        
     }
     
     required init?(coder: NSCoder) {

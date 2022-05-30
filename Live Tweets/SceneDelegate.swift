@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    var router: Router?
+    var router: RouterProtocol?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -18,7 +18,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = ViewController()
+        let viewProvider = ViewProvider(
+            dependencies:
+                DependenciesStrong(
+                    languageService: LanguageService(),
+                    router: nil,
+                    apiRulesService: APIRulesService()
+                )
+        )
+        router = Router(with: InitialView.self, input: .init(), output: .init(), viewProvider: viewProvider)
+        window?.rootViewController = router?.bottomNavigationController
         window?.makeKeyAndVisible()
     }
 

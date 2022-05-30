@@ -16,6 +16,8 @@ protocol ViewModelOutput {
     
 }
 
+struct EmptyIO: ViewModelInput, ViewModelOutput {}
+
 protocol BaseViewModelProtocol: ObservableObject {
     associatedtype Input: ViewModelInput
     associatedtype Output: ViewModelOutput
