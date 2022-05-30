@@ -38,6 +38,9 @@ class ViewProvider: ViewProviderProtocol {
         if inject.contains(.apiRulesService) {
             dependencies.apiRulesService = self.dependencies.apiRulesService
         }
+        if inject.contains(.apiStreamService) {
+            dependencies.apiStreamService = self.dependencies.apiStreamService
+        }
         return dependencies
     }
     

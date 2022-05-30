@@ -13,7 +13,7 @@ import RxSwift
 class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
     
     override class var inject: DependencyOptions {
-        [.router, .apiRulesService]
+        [.router, .apiRulesService, .apiStreamService]
     }
     
     let searchBarFullScreen: BehaviorRelay<Bool> = .init(value: true)
@@ -35,8 +35,6 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
             .debounce(.milliseconds(1300), scheduler: MainScheduler.instance)
             .flatMapLatest(doFilter)
             .map { _ in return true }
-            .asDriver(onErrorJustReturn: false)
-            .asObservable()
             .bind(to: streamEnabled)
             .disposed(by: disposeBag)
         
@@ -44,13 +42,35 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
             .bind(onNext: handleStreamState)
             .disposed(by: disposeBag)
         
-    }
-    
-    func handleStreamState(_ enabled: Bool) {
+        dependencies.apiStreamService?.output.bind(onNext: { output in
+            print("______________________________")
+            switch output {
+            case .connecting:
+                print("API Connecting")
+            case .disconnected:
+                print("API Disconnected")
+            case .data(let data):
+                print(String(data: data, encoding: .utf8)!)
+            }
+            print("______________________________")
+        }).disposed(by: disposeBag)
         
     }
     
-    func doFilter(_ text: String) -> Observable<RulesData> {
+    private func handleStreamState(_ enabled: Bool) {
+        print("state \(enabled) \(dependencies.apiStreamService)")
+        if enabled {
+            dependencies.apiStreamService?.connect()
+        } else {
+            dependencies.apiStreamService?.disconnect()
+        }
+    }
+    
+    func disconnect() {
+        streamEnabled.accept(false)
+    }
+    
+    private func doFilter(_ text: String) -> Observable<RulesData> {
         dependencies.apiRulesService?.reset(rules: [
             .init(value: text, tag: nil, id: nil)
         ]) ?? Observable.error(DIError.dependecyLost)

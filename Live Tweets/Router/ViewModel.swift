@@ -23,11 +23,12 @@ protocol BaseViewModelProtocol: ObservableObject {
     associatedtype Output: ViewModelOutput
     func didLoad()
     static var inject: DependencyOptions { get }
+    func didAppear(_ initial: Bool)
     init(input: Input, output: Output, dependencies: Dependencies)
 }
 
 class AnyViewModel {
-    class var inject: DependencyOptions { [] }
+    class var inject: DependencyOptions { [.router] }
     var disposeBag: DisposeBag = .init()
     let dependencies: Dependencies
     init(dependencies: Dependencies) {
@@ -37,6 +38,9 @@ class AnyViewModel {
 
 class BaseViewModel<Input: ViewModelInput, Output: ViewModelOutput>: AnyViewModel, BaseViewModelProtocol {
     func didLoad() {
+        
+    }
+    func didAppear(_ initial: Bool) {
         
     }
     required init(input: Input, output: Output, dependencies: Dependencies) {

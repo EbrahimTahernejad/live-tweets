@@ -1,4 +1,9 @@
-// Create a copy named Main.xcconfig and uncomment the following
+// Create copies named Main.debug.xcconfig and Main.release.xcconfig
+// Then fill the following
 
-// TWITTER_BEARER_TOKEN = TOKEN_HERE
-// TWITTER_BASE_URL = https:/$()/api.twitter.com/2/
+#include "Pods/Target Support Files/Pods-Live Tweets/Pods-Live Tweets.debug.xcconfig"
+// Or
+// #include "Pods/Target Support Files/Pods-Live Tweets/Pods-Live Tweets.release.xcconfig"
+
+TWITTER_BEARER_TOKEN = TOKEN_HERE
+TWITTER_BASE_URL = https:/$()/api.twitter.com/2/

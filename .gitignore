@@ -1,5 +1,5 @@
-Main.xcconfig
-
+Main.debug.xcconfig
+Main.release.xcconfig
 # Created by https://www.toptal.com/developers/gitignore/api/swift,swiftpackagemanager,swiftpm,cocoapods,xcode,macos,emacs,vim,nanoc,carthage
 # Edit at https://www.toptal.com/developers/gitignore?templates=swift,swiftpackagemanager,swiftpm,cocoapods,xcode,macos,emacs,vim,nanoc,carthage
 

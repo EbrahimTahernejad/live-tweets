@@ -14,6 +14,8 @@ protocol HostingControllerProtocol: UIViewController {
 class HostingController<ViewType: RootViewProtocol>: UIViewController, HostingControllerProtocol {
     let rootView: ViewType
     
+    var isInitialAppear = true
+    
     init(rootView: ViewType) {
         self.rootView = rootView
         super.init(nibName: nil, bundle: nil)
@@ -21,6 +23,17 @@ class HostingController<ViewType: RootViewProtocol>: UIViewController, HostingCo
     
     override func loadView() {
         view = rootView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        rootView.viewModel.didLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        rootView.viewModel.didAppear(isInitialAppear)
+        isInitialAppear = false
     }
     
     // Not needed

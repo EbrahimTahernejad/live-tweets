@@ -9,4 +9,22 @@ import UIKit
 
 class TweetListView: RootView<TweetListViewModel> {
     
+    override func loadSubviews() {
+        super.loadSubviews()
+        
+        
+    }
+    
+    override func layout() {
+        super.layout()
+        
+        
+    }
+    
+    override func setupViewModel() {
+        super.setupViewModel()
+        
+        
+    }
+    
 }

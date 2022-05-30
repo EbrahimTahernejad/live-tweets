@@ -10,7 +10,7 @@ import RxCocoa
 
 
 enum APIStreamServiceURLs: EndPoint {
-    case stream = "GET~tweets/search/stream?tweet.fields={tweet_fields}&expansions={expansions}&user.fields={user_fields}"
+    case stream = "GET~tweets/search/stream?tweet.fields={tweet_fields}&expansions={expansions}&user.fields={user_fields}&media.fields={media_fields}&poll.fields={poll_fields}"
 }
 
 enum APIStreamServiceOutput {
@@ -36,10 +36,20 @@ class APIStreamService: Service, APIStreamServiceProtocol {
     
     let output: PublishRelay<APIStreamServiceOutput> = .init()
     
-    @discardableResult
-    func connect() -> Bool {
+    @discardableResult func connect() -> Bool {
+        guard dataTask == nil else { return false }
         output.accept(.connecting)
-        let urlRequest = APIStreamServiceURLs.stream.request.getRequest()
+        let urlRequest =
+            APIStreamServiceURLs
+                .stream
+                .request
+                .getRequest(params: [
+                    "tweet_fields": "attachments,author_id,context_annotations,created_at,entities,geo,id,in_reply_to_user_id,lang,possibly_sensitive,public_metrics,referenced_tweets,source,text,withheld",
+                    "expansions": "author_id,referenced_tweets.id,attachments.media_keys,attachments.poll_ids",
+                    "user_fields": "created_at,profile_image_url,verified,url",
+                    "media_fields": "duration_ms,height,media_key,preview_image_url,public_metrics,type,url,width,alt_text",
+                    "poll_fields": "end_datetime,voting_status,duration_minutes"
+                ])
         dataTask = urlSession.dataTask(with: urlRequest)
         dataTask?.resume()
         return true

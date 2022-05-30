@@ -8,5 +8,7 @@
 import UIKit
 
 class InitialView: RootView<InitialViewModel> {
-    
+    override func setupViewModel() {
+        backgroundColor = .blue
+    }
 }
