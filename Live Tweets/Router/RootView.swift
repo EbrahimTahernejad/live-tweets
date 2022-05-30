@@ -22,6 +22,7 @@ class RootView<ViewModel: BaseViewModelProtocol>: UIView, RootViewProtocol {
         self.viewModel = viewModel
         super.init(frame: .zero)
         setup()
+        viewModel.didLoad()
     }
     
     func setup() {

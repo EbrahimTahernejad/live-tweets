@@ -35,6 +35,8 @@
 		0324A64A28447ECC0076AA0D /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A64928447ECC0076AA0D /* InitialViewModel.swift */; };
 		0324A64D284486970076AA0D /* TweetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A64C284486970076AA0D /* TweetListView.swift */; };
 		0324A64F284486A20076AA0D /* TweetListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A64E284486A20076AA0D /* TweetListViewModel.swift */; };
+		0324A65328448CDE0076AA0D /* Tweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A65228448CDE0076AA0D /* Tweets.swift */; };
+		0324A65528448FBA0076AA0D /* DIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A65428448FBA0076AA0D /* DIError.swift */; };
 		5CC8338C020FED53028F939F /* Pods_Live_Tweets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,8 @@
 		0324A64928447ECC0076AA0D /* InitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewModel.swift; sourceTree = "<group>"; };
 		0324A64C284486970076AA0D /* TweetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetListView.swift; sourceTree = "<group>"; };
 		0324A64E284486A20076AA0D /* TweetListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetListViewModel.swift; sourceTree = "<group>"; };
+		0324A65228448CDE0076AA0D /* Tweets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweets.swift; sourceTree = "<group>"; };
+		0324A65428448FBA0076AA0D /* DIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIError.swift; sourceTree = "<group>"; };
 		5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Live_Tweets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E5EF40AB1F29A4CD238163 /* Pods-Live Tweets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.release.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.release.xcconfig"; sourceTree = "<group>"; };
 		DD7FC5375B24AC017C725293 /* Pods-Live Tweets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.debug.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 			children = (
 				0324A616284467420076AA0D /* Dependencies.swift */,
 				0324A63B2844798E0076AA0D /* ViewProvider.swift */,
+				0324A65428448FBA0076AA0D /* DIError.swift */,
 			);
 			path = "Dependecy Injection";
 			sourceTree = "<group>";
@@ -162,8 +167,8 @@
 		0324A61D28446A940076AA0D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0324A62128446AAF0076AA0D /* APIRulesService.swift */,
-				0324A61F28446AAF0076AA0D /* LanguageService.swift */,
+				0324A651284489330076AA0D /* Language */,
+				0324A6502844892C0076AA0D /* API */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				0324A62728446B500076AA0D /* Rules.swift */,
+				0324A65228448CDE0076AA0D /* Tweets.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -254,6 +260,22 @@
 				0324A64E284486A20076AA0D /* TweetListViewModel.swift */,
 			);
 			path = "Tweet List";
+			sourceTree = "<group>";
+		};
+		0324A6502844892C0076AA0D /* API */ = {
+			isa = PBXGroup;
+			children = (
+				0324A62128446AAF0076AA0D /* APIRulesService.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		0324A651284489330076AA0D /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				0324A61F28446AAF0076AA0D /* LanguageService.swift */,
+			);
+			path = Language;
 			sourceTree = "<group>";
 		};
 		73453E0B29BBFE1346E5137C /* Frameworks */ = {
@@ -389,6 +411,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0324A64828447EC10076AA0D /* InitialView.swift in Sources */,
+				0324A65328448CDE0076AA0D /* Tweets.swift in Sources */,
 				0324A5F828445BAF0076AA0D /* AppDelegate.swift in Sources */,
 				0324A62828446B500076AA0D /* Rules.swift in Sources */,
 				0324A62528446AAF0076AA0D /* APIRulesService.swift in Sources */,
@@ -412,6 +435,7 @@
 				0324A60F284463F90076AA0D /* RootView.swift in Sources */,
 				0324A6142844667D0076AA0D /* ViewModel.swift in Sources */,
 				0324A63A2844786B0076AA0D /* FontStyle.swift in Sources */,
+				0324A65528448FBA0076AA0D /* DIError.swift in Sources */,
 				0324A64A28447ECC0076AA0D /* InitialViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
