@@ -31,6 +31,7 @@
 		0324A6372844758D0076AA0D /* App+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A6362844758D0076AA0D /* App+UIImage.swift */; };
 		0324A63A2844786B0076AA0D /* FontStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A6392844786B0076AA0D /* FontStyle.swift */; };
 		0324A63C2844798E0076AA0D /* ViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A63B2844798E0076AA0D /* ViewProvider.swift */; };
+		0324A64328447E680076AA0D /* en.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0324A64228447E680076AA0D /* en.strings */; };
 		5CC8338C020FED53028F939F /* Pods_Live_Tweets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,7 @@
 		0324A63B2844798E0076AA0D /* ViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProvider.swift; sourceTree = "<group>"; };
 		0324A63F28447A970076AA0D /* Main.template.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.template.xcconfig; sourceTree = "<group>"; };
 		0324A64028447AA40076AA0D /* Main.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Main.xcconfig; sourceTree = "<group>"; };
+		0324A64228447E680076AA0D /* en.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = en.strings; sourceTree = "<group>"; };
 		5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Live_Tweets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E5EF40AB1F29A4CD238163 /* Pods-Live Tweets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.release.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.release.xcconfig"; sourceTree = "<group>"; };
 		DD7FC5375B24AC017C725293 /* Pods-Live Tweets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.debug.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.debug.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		0324A63D28447A660076AA0D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0324A64128447E570076AA0D /* Localization */,
 				0324A63E28447A720076AA0D /* Configs */,
 				0324A60028445BB10076AA0D /* Assets.xcassets */,
 			);
@@ -202,6 +205,14 @@
 				0324A64028447AA40076AA0D /* Main.xcconfig */,
 			);
 			path = Configs;
+			sourceTree = "<group>";
+		};
+		0324A64128447E570076AA0D /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				0324A64228447E680076AA0D /* en.strings */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		73453E0B29BBFE1346E5137C /* Frameworks */ = {
@@ -281,6 +292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0324A64328447E680076AA0D /* en.strings in Resources */,
 				0324A60428445BB10076AA0D /* LaunchScreen.storyboard in Resources */,
 				0324A60128445BB10076AA0D /* Assets.xcassets in Resources */,
 			);
