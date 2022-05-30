@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RxCocoa
+import RxSwift
 
 struct Tweet: Codable {
     let data: [TweetData]

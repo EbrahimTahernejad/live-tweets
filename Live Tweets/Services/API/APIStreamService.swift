@@ -14,7 +14,7 @@ enum APIStreamServiceURLs: EndPoint {
 }
 
 enum APIStreamServiceOutput {
-    case disconnected, connecting, data(_ data: Data)
+    case disconnected, connecting, data(_ data: Tweet)
 }
 
 class APIStreamService: Service, APIStreamServiceProtocol {
@@ -63,6 +63,7 @@ class APIStreamService: Service, APIStreamServiceProtocol {
 
 protocol APIStreamServiceProtocol: ServiceProtocol {
     var output: PublishRelay<APIStreamServiceOutput> { get }
+    @discardableResult
     func connect() -> Bool
     func disconnect()
 }
@@ -73,8 +74,16 @@ extension APIStreamService: URLSessionDataDelegate {
     }
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        guard dataTask.state != .canceling else { return }
-        output.accept(.data(data))
+        guard
+            dataTask.state != .canceling,
+            String(data: data, encoding: .utf8)?
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .count ?? 0 > 0,
+            let out = try? JSONDecoder().decode(Tweet.self, from: data)
+        else {
+            return
+        }
+        output.accept(.data(out))
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {

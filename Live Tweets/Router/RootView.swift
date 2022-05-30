@@ -15,7 +15,13 @@ protocol RootViewProtocol: UIView {
     init(viewModel: ViewModel, viewProvider: ViewProviderProtocol)
 }
 
-class RootView<ViewModel: BaseViewModelProtocol>: UIView, RootViewProtocol {
+protocol RootViewSetupProtocol: RootViewProtocol {
+    func loadSubviews()
+    func layout()
+    func setupViewModel()
+}
+
+class RootView<ViewModel: BaseViewModelProtocol>: UIView, RootViewProtocol, RootViewSetupProtocol {
     
     weak var viewProvider: ViewProviderProtocol?
     let viewModel: ViewModel
@@ -28,7 +34,7 @@ class RootView<ViewModel: BaseViewModelProtocol>: UIView, RootViewProtocol {
         
         translatesAutoresizingMaskIntoConstraints = false
         setup()
-        // viewModel.didLoad()
+        viewModel.didLoad()
     }
     
     private func setupTapGesture() {
@@ -61,5 +67,43 @@ class RootView<ViewModel: BaseViewModelProtocol>: UIView, RootViewProtocol {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class RootCellView<ViewModel: BaseViewModelProtocol>: UITableViewCell, RootViewProtocol, RootViewSetupProtocol {
+    weak var viewProvider: ViewProviderProtocol?
+    let viewModel: ViewModel
+    
+    let disposeBag: DisposeBag = DisposeBag()
+    
+    required init(viewModel: ViewModel, viewProvider: ViewProviderProtocol) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        setup()
+        viewModel.didLoad()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setup() {
+        loadSubviews()
+        layout()
+        setupViewModel()
+    }
+    
+    func loadSubviews() {
+        
+    }
+    
+    func layout() {
+        
+    }
+    
+    func setupViewModel() {
+        
     }
 }

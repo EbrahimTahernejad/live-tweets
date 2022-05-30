@@ -19,6 +19,7 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
     let searchBarFullScreen: BehaviorRelay<Bool> = .init(value: true)
     let filterText: BehaviorRelay<String> = .init(value: "")
     let filterResults: BehaviorRelay<[Tweet]> = .init(value: [])
+    let streamOutput: PublishRelay<[Tweet]> = .init()
     
     let streamEnabled: BehaviorRelay<Bool> = .init(value: false)
     
@@ -35,30 +36,34 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
             .debounce(.milliseconds(1300), scheduler: MainScheduler.instance)
             .flatMapLatest(doFilter)
             .map { _ in return true }
-            .bind(to: streamEnabled)
-            .disposed(by: disposeBag)
-        
-        streamEnabled
             .bind(onNext: handleStreamState)
             .disposed(by: disposeBag)
         
-        dependencies.apiStreamService?.output.bind(onNext: { output in
-            print("______________________________")
+        streamOutput
+            .map { [weak self] out in
+                return out + (self?.filterResults.value ?? [])
+            }
+            .bind(to: filterResults)
+            .disposed(by: disposeBag)
+        
+        dependencies.apiStreamService?.output.bind { [weak self] output in
             switch output {
             case .connecting:
+                self?.streamEnabled.accept(true)
                 print("API Connecting")
             case .disconnected:
+                self?.streamEnabled.accept(false)
                 print("API Disconnected")
             case .data(let data):
-                print(String(data: data, encoding: .utf8)!)
+                self?.streamOutput.accept(data.data.map({ d in
+                    return Tweet(data: [d], includes: data.includes)
+                }))
             }
-            print("______________________________")
-        }).disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
         
     }
     
     private func handleStreamState(_ enabled: Bool) {
-        print("state \(enabled) \(dependencies.apiStreamService)")
         if enabled {
             dependencies.apiStreamService?.connect()
         } else {
