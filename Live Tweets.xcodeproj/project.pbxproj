@@ -37,6 +37,7 @@
 		0324A64F284486A20076AA0D /* TweetListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A64E284486A20076AA0D /* TweetListViewModel.swift */; };
 		0324A65328448CDE0076AA0D /* Tweets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A65228448CDE0076AA0D /* Tweets.swift */; };
 		0324A65528448FBA0076AA0D /* DIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A65428448FBA0076AA0D /* DIError.swift */; };
+		0324A657284497480076AA0D /* APIStreamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A656284497480076AA0D /* APIStreamService.swift */; };
 		5CC8338C020FED53028F939F /* Pods_Live_Tweets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,7 @@
 		0324A64E284486A20076AA0D /* TweetListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetListViewModel.swift; sourceTree = "<group>"; };
 		0324A65228448CDE0076AA0D /* Tweets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tweets.swift; sourceTree = "<group>"; };
 		0324A65428448FBA0076AA0D /* DIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIError.swift; sourceTree = "<group>"; };
+		0324A656284497480076AA0D /* APIStreamService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStreamService.swift; sourceTree = "<group>"; };
 		5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Live_Tweets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E5EF40AB1F29A4CD238163 /* Pods-Live Tweets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.release.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.release.xcconfig"; sourceTree = "<group>"; };
 		DD7FC5375B24AC017C725293 /* Pods-Live Tweets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.debug.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.debug.xcconfig"; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				0324A62128446AAF0076AA0D /* APIRulesService.swift */,
+				0324A656284497480076AA0D /* APIStreamService.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				0324A619284467610076AA0D /* Service.swift in Sources */,
 				0324A63C2844798E0076AA0D /* ViewProvider.swift in Sources */,
 				0324A630284474D60076AA0D /* UIFont+Style.swift in Sources */,
+				0324A657284497480076AA0D /* APIStreamService.swift in Sources */,
 				0324A61C284467D10076AA0D /* RxSwift+UserDefaults.swift in Sources */,
 				0324A612284466410076AA0D /* Router.swift in Sources */,
 				0324A60F284463F90076AA0D /* RootView.swift in Sources */,

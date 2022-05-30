@@ -45,12 +45,12 @@ extension RawRepresentable where RawValue == EndPoint {
 }
 
 extension EndPoint {
-    // Main method
-    private func send<Res: Decodable>(
-        params: [String:String] = [:],
-        headers: [String:String] = [:],
+    
+    private func getRequest(
+        params: [String:String],
+        headers: [String:String],
         body: Data?
-    ) -> Observable<Res> {
+    ) -> URLRequest {
         // Add parameters and create url
         var urlStr = url
         for k in params.keys {
@@ -81,7 +81,19 @@ extension EndPoint {
             req.httpBody = nil
         }
         
-        // Finish up
+        return req
+    }
+    
+    // Main method
+    private func send<Res: Decodable>(
+        params: [String:String],
+        headers: [String:String],
+        body: Data?
+    ) -> Observable<Res> {
+        // Create request object
+        let req = getRequest(params: params, headers: headers, body: body)
+        
+        // Send request
         return URLSession.shared.rx.data(request: req).map { response in
             // Handle empty responses
             if let response = EmptyResponse() as? Res {
@@ -97,7 +109,7 @@ extension EndPoint {
         params: [String:String] = [:],
         headers: [String:String] = [:]
     ) -> Observable<Res> {
-        return self.send(params: params, headers: headers, body: nil)
+        return send(params: params, headers: headers, body: nil)
     }
     
     // Send with body
@@ -108,9 +120,29 @@ extension EndPoint {
     ) -> Observable<Res> {
         do {
             let body = try JSONEncoder().encode(body)
-            return self.send(params: params, headers: headers, body: body)
+            return send(params: params, headers: headers, body: body)
         } catch {
             return Observable.error(error)
         }
+    }
+    
+    func getRequest(
+        params: [String:String] = [:],
+        headers: [String:String] = [:]
+    ) -> URLRequest {
+        return getRequest(params: params, headers: headers, body: nil)
+    }
+    
+    func getRequest<Req: Encodable>(
+        body: Req,
+        params: [String:String] = [:],
+        headers: [String:String] = [:]
+    ) -> URLRequest? {
+        guard
+            let body = try? JSONEncoder().encode(body)
+        else {
+            return nil
+        }
+        return getRequest(params: params, headers: headers, body: body)
     }
 }

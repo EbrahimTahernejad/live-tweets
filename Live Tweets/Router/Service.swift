@@ -13,6 +13,6 @@ protocol ServiceProtocol: AnyObject {
     
 }
 
-class Service: ServiceProtocol {
+class Service: NSObject, ServiceProtocol {
     let disposeBag: DisposeBag = .init()
 }
