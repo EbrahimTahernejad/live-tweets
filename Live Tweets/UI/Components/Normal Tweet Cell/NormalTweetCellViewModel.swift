@@ -14,6 +14,10 @@ struct NormalTweetCellViewModelInput: ViewModelInput {
 }
 
 class NormalTweetCellViewModel: BaseViewModel<NormalTweetCellViewModelInput, EmptyIO> {
+    class override var inject: DependencyOptions {
+        return [.router, .languageService]
+    }
+    
     let author: BehaviorRelay<TweetUser?> = .init(value: nil)
     
     override func didLoad() {

@@ -78,6 +78,21 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
         ]
     }()
     
+    lazy private var retweetIcon: UIImageView = {
+        let imageView = UIImageView(image: .app.retweet)
+        imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    lazy private var retweetLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(style: .subtitle)
+        label.textColor = .app.label2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     override func loadSubviews() {
         super.loadSubviews()
         
@@ -90,6 +105,8 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
         contentView.addSubview(nameLabel)
         contentView.addSubview(usernameLabel)
         contentView.addSubview(verifiedImageView)
+        contentView.addSubview(retweetLabel)
+        contentView.addSubview(retweetIcon)
     }
     
     override func layout() {
@@ -104,7 +121,7 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
         
         NSLayoutConstraint.activate([
             avatarContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            avatarContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            avatarContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 21),
             avatarContainer.widthAnchor.constraint(equalToConstant: 35),
             avatarContainer.heightAnchor.constraint(equalTo: avatarContainer.widthAnchor)
         ])
@@ -131,6 +148,18 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
             verifiedImageView.widthAnchor.constraint(equalToConstant: 14),
             verifiedImageView.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 4),
             verifiedImageView.bottomAnchor.constraint(equalTo: avatarContainer.centerYAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            retweetIcon.heightAnchor.constraint(equalToConstant: 14),
+            retweetIcon.widthAnchor.constraint(equalToConstant: 14),
+            retweetIcon.trailingAnchor.constraint(equalTo: avatarContainer.trailingAnchor),
+            retweetIcon.bottomAnchor.constraint(equalTo: avatarContainer.topAnchor, constant: -2)
+        ])
+        
+        NSLayoutConstraint.activate([
+            retweetLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            retweetLabel.bottomAnchor.constraint(equalTo: avatarContainer.topAnchor, constant: -2)
         ])
     }
     
@@ -184,6 +213,19 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
                 return text
             }
             .bind(to: textView.rx.attributedText)
+            .disposed(by: disposeBag)
+    
+        viewModel.input.retweeter
+            .bind { [weak self] retweeter in
+                guard let retweeter = retweeter else {
+                    self?.retweetLabel.isHidden = true
+                    self?.retweetIcon.isHidden = true
+                    return
+                }
+                self?.retweetLabel.isHidden = false
+                self?.retweetIcon.isHidden = false
+                self?.retweetLabel.text = self?.viewModel.dependencies.languageService?.NormalTweet_Retweet.params(["name": retweeter.name])
+            }
             .disposed(by: disposeBag)
             
     }

@@ -13,8 +13,10 @@ enum Language: String {
     case en
 }
 
+@dynamicMemberLookup
 protocol LanguageServiceProtocol: AnyObject {
     var language: UserDefaultsRelay<String> { get }
+    subscript(dynamicMember member: String) -> String { get }
 }
 
 @dynamicMemberLookup
@@ -27,12 +29,12 @@ class LanguageService: Service, LanguageServiceProtocol {
         )
     
     subscript(dynamicMember member: String) -> String {
-        return NSLocalizedString(member, tableName: language.value, bundle: .main, value: member, comment: member)
+        return NSLocalizedString(member, tableName: language.value ?? "en", bundle: .main, value: member, comment: member)
     }
     
     subscript(dynamicMember member: String) -> Observable<String> {
         return language.map({
-            return NSLocalizedString(member, tableName: $0, bundle: .main, value: member, comment: member)
+            return NSLocalizedString(member, tableName: $0 ?? "en", bundle: .main, value: member, comment: member)
         })
     }
     

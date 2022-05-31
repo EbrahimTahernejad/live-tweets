@@ -17,6 +17,7 @@ enum TweetCellType {
     case url(_ url: TweetURL)
     case media(_ media: TweetMedia)
     case poll(_ poll: TweetPoll)
+    case details(tweet: Tweet)
 }
 
 extension TweetCellType: IdentifiableType, Equatable {
@@ -34,6 +35,8 @@ extension TweetCellType: IdentifiableType, Equatable {
             return "M_" + media.identifier
         case .poll(let poll):
             return "P_" + poll.identifier
+        case .details(let tweet):
+            return "D_" + tweet.data.identifier
         }
     }
     
@@ -57,6 +60,9 @@ extension SectionOfData: SectionModelType, AnimatableSectionModelType {
     }
 }
 
+enum TweetFetchState {
+    case stopped, loading, invalid, started
+}
 
 class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
     
@@ -66,6 +72,7 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
     
     let searchBarFullScreen: BehaviorRelay<Bool> = .init(value: true)
     let filterText: BehaviorRelay<String> = .init(value: "")
+    let state: BehaviorRelay<TweetFetchState> = .init(value: .invalid)
     
     private let filterResults: BehaviorRelay<[SectionOfData]> = .init(value: [])
     private let streamOutput: PublishRelay<[Tweet]> = .init()
@@ -122,8 +129,12 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
                 print("API Connecting")
             case .disconnected:
                 self?.streamEnabled.accept(false)
+                self?.state.accept(.stopped)
                 print("API Disconnected")
             case .data(let data):
+                if self?.state.value != .started {
+                    self?.state.accept(.started)
+                }
                 self?.streamOutput.accept([data])
             }
         }.disposed(by: disposeBag)
@@ -230,14 +241,48 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
         }
     }
     
+    func connect() {
+        dependencies.apiStreamService?.connect()
+        state.accept(.loading)
+    }
+    
     func disconnect() {
-        streamEnabled.accept(false)
+        dependencies.apiStreamService?.disconnect()
+        state.accept(.loading)
     }
     
     private func doFilter(_ text: String) -> Observable<RulesData> {
-        dependencies.apiRulesService?.reset(rules: [
+        state.accept(.loading)
+        return dependencies.apiRulesService?.reset(rules: [
             .init(value: text, tag: nil, id: nil)
         ]) ?? Observable.error(DIError.dependecyLost)
+    }
+    
+    private func detailSection(for indexPath: IndexPath) -> SectionOfData {
+        let sectionData = filterResults.value[indexPath.section]
+        // Copy the section data
+        var items = Array(sectionData.items)
+        
+        // Find the bottom normal tweet
+        if let mainItem = items.compactMap({ item -> Tweet? in
+            switch item {
+            case .normal(let tweet, _):
+                return tweet
+            case .details(_), .media(_), .poll(_), .quoted(_), .url(_):
+                return nil
+            }
+        }).last {
+            items.append(.details(tweet: mainItem))
+        }
+        
+        // Return the new section
+        return SectionOfData(items: items, identity: UUID().uuidString)
+        
+    }
+    
+    func navigateToDetails(for indexPath: IndexPath) {
+        let sectionData = detailSection(for: indexPath)
+        self.dependencies.router?.navigate(view: TweetDescriptionView.self, input: .init(section: sectionData), output: .init(), animated: true, completion: nil)
     }
     
 }

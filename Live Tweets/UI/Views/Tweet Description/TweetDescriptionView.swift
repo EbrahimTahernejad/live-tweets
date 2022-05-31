@@ -1,40 +1,19 @@
 //
-//  TweetListView.swift
+//  TweetDescriptionView.swift
 //  Live Tweets
 //
-//  Created by Ebrahim Tahernejad on 3/9/1401 AP.
+//  Created by Ebrahim Tahernejad on 3/10/1401 AP.
 //
 
+import RxCocoa
 import UIKit
 import RxDataSources
+import RxSwift
 
-
-class TweetListView: RootView<TweetListViewModel> {
-    
+class TweetDescriptionView: RootView<TweetDescriptionViewModel> {
     lazy var tableView: UITableView = {
         let tableView = UITableView()
         return tableView
-    }()
-    
-    lazy var searchField: SearchFieldView? = {
-        let field = viewProvider?.provide(with: SearchFieldView.self, input: .init(), output: .init())
-        return field
-    }()
-    
-    lazy var cancelButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(systemItem: .pause)
-        return item
-    }()
-    
-    lazy var refreshButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(systemItem: .refresh)
-        item.isEnabled = false
-        return item
-    }()
-    
-    lazy var startButton: UIBarButtonItem = {
-        let item = UIBarButtonItem(systemItem: .play)
-        return item
     }()
     
     override func loadSubviews() {
@@ -43,18 +22,14 @@ class TweetListView: RootView<TweetListViewModel> {
         backgroundColor = .app.background
         tableView.backgroundColor = .app.background
         tableView.separatorStyle = .none
-        tableView
-            .rx.setDelegate(self)
-            .disposed(by: disposeBag)
         tableView.keyboardDismissMode = .onDrag
         addSubview(tableView)
     }
     
     override func setup(controller: UIViewController) {
         super.setup(controller: controller)
-                
-        controller.navigationItem.titleView = searchField
-        layoutSubviews()
+        
+        controller.title = viewModel.dependencies.languageService?.TweetDescription_Title
     }
     
     override func layout() {
@@ -73,7 +48,7 @@ class TweetListView: RootView<TweetListViewModel> {
     override func setupViewModel() {
         super.setupViewModel()
                 
-        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfData>.init{ [weak self] dataSource, tableView, indexPath, item in
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfData>.init{ [weak self] dataSource, tableView, indexPath, item in
             guard let self = self else { return UITableViewCell() }
             switch item {
             case .normal(let tweet, let retweeter):
@@ -105,49 +80,9 @@ class TweetListView: RootView<TweetListViewModel> {
             
         }
         
-        searchField?.viewModel.output.query
-            .map { $0 ?? "" }
-            .bind(to: viewModel.filterText)
-            .disposed(by: disposeBag)
-        
-        viewModel.data
+        Observable.just([viewModel.input.section])
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
-        
-        viewModel.state.bind { [weak self] state in
-            DispatchQueue.main.async { [weak self, state] () in
-                switch state {
-                case .loading:
-                    self?.controller?.navigationItem.rightBarButtonItem = self?.refreshButton
-                case .started:
-                    self?.controller?.navigationItem.rightBarButtonItem = self?.cancelButton
-                case .stopped:
-                    self?.controller?.navigationItem.rightBarButtonItem = self?.startButton
-                case .invalid:
-                    self?.controller?.navigationItem.rightBarButtonItem = nil
-                }
-            }
-        }.disposed(by: disposeBag)
-        
-        startButton.rx.tap.bind(onNext: viewModel.connect).disposed(by: disposeBag)
-        cancelButton.rx.tap.bind(onNext: viewModel.disconnect).disposed(by: disposeBag)
-        
     }
-    
-}
 
-extension TweetListView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        1
-    }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footer = UIView()
-        footer.backgroundColor = .app.label2.withAlphaComponent(0.2)
-        return footer
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        
-        viewModel.navigateToDetails(for: indexPath)
-    }
 }

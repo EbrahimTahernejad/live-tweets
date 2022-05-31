@@ -5,3 +5,7 @@
   Created by Ebrahim Tahernejad on 3/9/1401 AP.
   
 */
+
+"NormalTweet_Retweet" = "{name} Retweeted";
+"TweetDescription_Title" = "Tweet Description";
+"SearchField_Placeholder" = "Search";
