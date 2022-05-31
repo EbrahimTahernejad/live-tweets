@@ -17,7 +17,7 @@ Name it Main.xcconfig and fill in the requires values
 ### Values
 
 - `TWITTER_BEARER_TOKEN`: The bearer token provided by twitter in [developer dashboard](https://developer.twitter.com/en/portal/dashboard)
-- `TWITTER_BASE_URL`: Don't change, twitter base url (should end with trailing `/`)
+- `TWITTER_BASE_URL`: Twitter's base url. Don't change (should end with trailing `/`)
 
 ## Project Structure
 
