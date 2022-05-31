@@ -8,13 +8,21 @@
 
 ## Initialization
 
+### Pod
+
+To initialize dependecies execute `pod install` in terminal.
+
+Ofcourse you'll need to install cocoapods.
+
+### Config
+
 To initialize this project, you need to create a copy of the [Main.template.xcconfig](Live%20Tweets/Resources/Configs/Main.template.xcconfig) file, located in:
 
 `Live Tweets/Resources/Configs/`
 
 Name it Main.xcconfig and fill in the requires values
 
-### Values
+#### Values
 
 - `TWITTER_BEARER_TOKEN`: The bearer token provided by twitter in [developer dashboard](https://developer.twitter.com/en/portal/dashboard)
 - `TWITTER_BASE_URL`: Twitter's base url. Don't change (should end with trailing `/`)
