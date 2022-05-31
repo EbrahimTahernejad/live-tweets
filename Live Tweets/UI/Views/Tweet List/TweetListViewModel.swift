@@ -144,6 +144,25 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
         }
         
         var after: [TweetCellType] = []
+        
+        // Check if there are any medias and show them
+        if
+            let medias = tweet.attachments?.media_keys?
+                .compactMap({ key in
+                    return includes?.media?.first(where: { $0.media_key == key })
+                })
+        {
+            after.append(contentsOf: transform(medias: medias))
+        }
+        
+        // Check for first url that has metadata
+        // And append it
+        if
+            let url = tweet.entities?.urls?.first(where: { $0.title != nil })
+        {
+            after.append(.url(url))
+        }
+        
         // Check if there is any qouted tweet to add
         if
             let ref = tweet.referenced_tweets?.first(where: { $0.type == .quoted }),
@@ -154,25 +173,7 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
             )
         }
         
-        // Check if there are any medias and show them
         var before: [TweetCellType] = []
-        if
-            let medias = tweet.attachments?.media_keys?
-                .compactMap({ key in
-                    return includes?.media?.first(where: { $0.media_key == key })
-                })
-        {
-            before.append(contentsOf: transform(medias: medias))
-        }
-        
-        // Check for first url that has metadata
-        // And append it
-        if
-            let url = tweet.entities?.urls?.first(where: { $0.title != nil })
-        {
-            before.append(.url(url))
-        }
-        
         // Having no retweeter means the current tweet
         // Might not be the first one
         if
