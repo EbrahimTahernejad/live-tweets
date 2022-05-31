@@ -8,18 +8,6 @@
 import UIKit
 import RxDataSources
 
-struct SectionOfData {
-    var items: [Item]
-}
-
-extension SectionOfData: SectionModelType {
-    typealias Item = TweetCellType
-
-    init(original: SectionOfData, items: [Item]) {
-        self = original
-        self.items = items
-    }
-}
 
 class TweetListView: RootView<TweetListViewModel> {
     
@@ -75,7 +63,7 @@ class TweetListView: RootView<TweetListViewModel> {
     override func setupViewModel() {
         super.setupViewModel()
                 
-        let dataSource = RxTableViewSectionedReloadDataSource<SectionOfData>.init{ [weak self] dataSource, tableView, indexPath, item in
+        let dataSource = RxTableViewSectionedAnimatedDataSource<SectionOfData>.init{ [weak self] dataSource, tableView, indexPath, item in
             guard let self = self else { return UITableViewCell() }
             switch item {
             case .normal(let tweet, let retweeter):
@@ -87,14 +75,21 @@ class TweetListView: RootView<TweetListViewModel> {
                 let cell = (tableView.dequeueReusableCell(withIdentifier: "MediaTweetCellView") as? MediaTweetCellView) ?? self.viewProvider?.provide(with: MediaTweetCellView.self, input: .init(), output: .init())
                 cell?.viewModel.input.media.accept(media)
                 return cell!
-            case .quoted(_), .url(_), .poll(_):
+            case .url(let url):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: "URLTweetCellView") as? URLTweetCellView) ?? self.viewProvider?.provide(with: URLTweetCellView.self, input: .init(), output: .init())
+                cell?.viewModel.input.url.accept(url)
+                return cell!
+            case .quoted(let tweet):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: "QuoteTweetCellView") as? QuoteTweetCellView) ?? self.viewProvider?.provide(with: QuoteTweetCellView.self, input: .init(), output: .init())
+                cell?.viewModel.input.tweet.accept(tweet)
+                return cell!
+            case .poll(_):
                 return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") ?? UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
             }
             
         }
         
         viewModel.data
-            .map { $0.map { SectionOfData(items: $0) } }
             .bind(to: tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }

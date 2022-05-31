@@ -1,18 +1,30 @@
 //
-//  Normal.swift
+//  QuoteTweetCell.swift
 //  Live Tweets
 //
-//  Created by Ebrahim Tahernejad on 3/9/1401 AP.
+//  Created by Ebrahim Tahernejad on 3/10/1401 AP.
 //
 
 import Foundation
 import UIKit
 import SDWebImage
 
-class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
+class QuoteTweetCellView: RootCellView<QuoteTweetCellViewModel> {
     override class var reuseIdentifier: String {
-        return "NormalTweetCellView"
+        return "QuoteTweetCellView"
     }
+    
+    lazy var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.cornerRadius = 8
+        view.layer.masksToBounds = true
+        view.clipsToBounds = true
+        view.layer.borderColor = UIColor.app.label2.withAlphaComponent(0.17).cgColor
+        view.layer.borderWidth = 1
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     lazy private var textView: UITextView = {
         let textView = UITextView()
@@ -78,34 +90,51 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
         ]
     }()
     
+    lazy var picView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    var aspectConstraint: NSLayoutConstraint?
+    
     override func loadSubviews() {
         super.loadSubviews()
         
         backgroundColor = .app.background
         selectionStyle = .none
         
-        contentView.addSubview(textView)
-        contentView.addSubview(avatarContainer)
+        contentView.addSubview(containerView)
+        containerView.addSubview(textView)
+        containerView.addSubview(avatarContainer)
         avatarContainer.addSubview(avatarImageView)
-        contentView.addSubview(nameLabel)
-        contentView.addSubview(usernameLabel)
-        contentView.addSubview(verifiedImageView)
+        containerView.addSubview(nameLabel)
+        containerView.addSubview(usernameLabel)
+        containerView.addSubview(verifiedImageView)
+        containerView.addSubview(picView)
     }
     
     override func layout() {
         super.layout()
         
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: avatarContainer.bottomAnchor, constant: 10),
-            textView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            textView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            textView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10)
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
         ])
         
         NSLayoutConstraint.activate([
-            avatarContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            avatarContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            avatarContainer.widthAnchor.constraint(equalToConstant: 35),
+            textView.topAnchor.constraint(equalTo: avatarContainer.bottomAnchor, constant: 10),
+            textView.bottomAnchor.constraint(equalTo: picView.topAnchor, constant: -10),
+            textView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            textView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            avatarContainer.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 10),
+            avatarContainer.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            avatarContainer.widthAnchor.constraint(equalToConstant: 16),
             avatarContainer.heightAnchor.constraint(equalTo: avatarContainer.widthAnchor)
         ])
         
@@ -118,20 +147,29 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
         
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: avatarContainer.trailingAnchor, constant: 10),
-            nameLabel.bottomAnchor.constraint(equalTo: usernameLabel.topAnchor, constant: 0)
+            nameLabel.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor, constant: 0)
         ])
         
         NSLayoutConstraint.activate([
-            usernameLabel.leadingAnchor.constraint(equalTo: avatarContainer.trailingAnchor, constant: 10),
-            usernameLabel.topAnchor.constraint(equalTo: avatarContainer.centerYAnchor, constant: 0)
+            usernameLabel.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 20),
+            usernameLabel.centerYAnchor.constraint(equalTo: avatarContainer.centerYAnchor, constant: 0)
         ])
         
         NSLayoutConstraint.activate([
             verifiedImageView.heightAnchor.constraint(equalToConstant: 14),
             verifiedImageView.widthAnchor.constraint(equalToConstant: 14),
-            verifiedImageView.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 4),
-            verifiedImageView.bottomAnchor.constraint(equalTo: avatarContainer.centerYAnchor)
+            verifiedImageView.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 3),
+            verifiedImageView.centerYAnchor.constraint(equalTo: avatarContainer.centerYAnchor)
         ])
+        
+        NSLayoutConstraint.activate([
+            picView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            picView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            picView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor)
+        ])
+        
+        aspectConstraint = picView.heightAnchor.constraint(equalToConstant: 0)
+        aspectConstraint?.isActive = true
     }
     
     override func setupViewModel() {
@@ -156,6 +194,29 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
             .map { $0?.name ?? "" }
             .bind(to: nameLabel.rx.text)
             .disposed(by: disposeBag)
+        
+        viewModel.input.tweet
+            .map { $0?.includes?.media }
+            .bind { [weak self] medias in
+                guard let self = self else { return }
+                guard
+                    let medias = medias,
+                    let media = medias.first(where: { [weak self] media in
+                        return self?.viewModel.input.tweet.value?.data.attachments?.media_keys?.contains(media.media_key) ?? false
+                    }),
+                    let urlStr = media.url ?? media.preview_image_url,
+                    let url = URL(string: urlStr)
+                else {
+                    self.aspectConstraint?.isActive = false
+                    self.aspectConstraint = self.picView.heightAnchor.constraint(equalToConstant: 0)
+                    self.aspectConstraint?.isActive = true
+                    return
+                }
+                self.aspectConstraint?.isActive = false
+                self.aspectConstraint = self.picView.heightAnchor.constraint(equalTo: self.picView.widthAnchor, multiplier: CGFloat(media.height) / CGFloat(media.width))
+                self.aspectConstraint?.isActive = true
+                self.picView.sd_setImage(with: url)
+            }.disposed(by: disposeBag)
         
         viewModel.input.tweet
             .compactMap { $0 }
@@ -188,3 +249,4 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
             
     }
 }
+

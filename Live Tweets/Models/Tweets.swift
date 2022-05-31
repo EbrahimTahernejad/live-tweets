@@ -20,6 +20,8 @@ struct Tweet: Codable {
 }
 
 struct TweetData: Codable {
+    let identifier = UUID().uuidString
+    
     let entities: TweetEntities?
     let attachments: TweetAttachments?
     let public_metrics: TweetMetrics?
@@ -72,6 +74,8 @@ struct TweetMention: Codable, RangeItem {
 }
 
 struct TweetURL: Codable, RangeItem {
+    let identifier = UUID().uuidString
+    
     let start: Int
     let end: Int
     let url: String
@@ -88,6 +92,8 @@ struct TweetURLImage: Codable {
 }
 
 struct TweetPoll: Codable {
+    let identifier = UUID().uuidString
+    
     struct PollOption: Codable {
         let position: Int
         let label: String
@@ -124,6 +130,9 @@ struct TweetIncludes: Codable {
 }
 
 struct TweetMedia: Codable {
+    
+    let identifier = UUID().uuidString
+    
     struct MediaMetrics: Codable {
         let viewer_count: Int?
     }

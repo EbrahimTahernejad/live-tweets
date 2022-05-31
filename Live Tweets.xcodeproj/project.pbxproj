@@ -44,6 +44,10 @@
 		0324A66628455ABB0076AA0D /* Rx+SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A66528455ABB0076AA0D /* Rx+SDWebImage.swift */; };
 		0324A669284594480076AA0D /* MediaTweetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A668284594480076AA0D /* MediaTweetCellView.swift */; };
 		0324A66B2845945C0076AA0D /* MediaTweetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A66A2845945C0076AA0D /* MediaTweetCellViewModel.swift */; };
+		0324A66E2845B51C0076AA0D /* URLTweetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A66D2845B51C0076AA0D /* URLTweetCellView.swift */; };
+		0324A6702845B5280076AA0D /* URLTweetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A66F2845B5280076AA0D /* URLTweetCellViewModel.swift */; };
+		0324A6732845C00B0076AA0D /* QuoteTweetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A6722845C00B0076AA0D /* QuoteTweetCellView.swift */; };
+		0324A6752845C0190076AA0D /* QuoteTweetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A6742845C0190076AA0D /* QuoteTweetCellViewModel.swift */; };
 		5CC8338C020FED53028F939F /* Pods_Live_Tweets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +94,10 @@
 		0324A66528455ABB0076AA0D /* Rx+SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+SDWebImage.swift"; sourceTree = "<group>"; };
 		0324A668284594480076AA0D /* MediaTweetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTweetCellView.swift; sourceTree = "<group>"; };
 		0324A66A2845945C0076AA0D /* MediaTweetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTweetCellViewModel.swift; sourceTree = "<group>"; };
+		0324A66D2845B51C0076AA0D /* URLTweetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTweetCellView.swift; sourceTree = "<group>"; };
+		0324A66F2845B5280076AA0D /* URLTweetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTweetCellViewModel.swift; sourceTree = "<group>"; };
+		0324A6722845C00B0076AA0D /* QuoteTweetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTweetCellView.swift; sourceTree = "<group>"; };
+		0324A6742845C0190076AA0D /* QuoteTweetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTweetCellViewModel.swift; sourceTree = "<group>"; };
 		5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Live_Tweets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E5EF40AB1F29A4CD238163 /* Pods-Live Tweets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.release.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.release.xcconfig"; sourceTree = "<group>"; };
 		DD7FC5375B24AC017C725293 /* Pods-Live Tweets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.debug.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.debug.xcconfig"; sourceTree = "<group>"; };
@@ -301,6 +309,8 @@
 		0324A65B2844C5250076AA0D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0324A6712845BFFB0076AA0D /* Quote Tweet Cell */,
+				0324A66C2845B4490076AA0D /* URL Tweet Cell */,
 				0324A667284594110076AA0D /* Media Tweet Cell */,
 				0324A65C2844C52A0076AA0D /* Normal Tweet Cell */,
 			);
@@ -323,6 +333,24 @@
 				0324A66A2845945C0076AA0D /* MediaTweetCellViewModel.swift */,
 			);
 			path = "Media Tweet Cell";
+			sourceTree = "<group>";
+		};
+		0324A66C2845B4490076AA0D /* URL Tweet Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0324A66D2845B51C0076AA0D /* URLTweetCellView.swift */,
+				0324A66F2845B5280076AA0D /* URLTweetCellViewModel.swift */,
+			);
+			path = "URL Tweet Cell";
+			sourceTree = "<group>";
+		};
+		0324A6712845BFFB0076AA0D /* Quote Tweet Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0324A6722845C00B0076AA0D /* QuoteTweetCellView.swift */,
+				0324A6742845C0190076AA0D /* QuoteTweetCellViewModel.swift */,
+			);
+			path = "Quote Tweet Cell";
 			sourceTree = "<group>";
 		};
 		73453E0B29BBFE1346E5137C /* Frameworks */ = {
@@ -470,9 +498,12 @@
 				0324A64F284486A20076AA0D /* TweetListViewModel.swift in Sources */,
 				0324A64D284486970076AA0D /* TweetListView.swift in Sources */,
 				0324A62E284474610076AA0D /* String+LocalizationParameters.swift in Sources */,
+				0324A6752845C0190076AA0D /* QuoteTweetCellViewModel.swift in Sources */,
+				0324A66E2845B51C0076AA0D /* URLTweetCellView.swift in Sources */,
 				0324A5FA28445BAF0076AA0D /* SceneDelegate.swift in Sources */,
 				0324A635284475370076AA0D /* String+CamelToKebab.swift in Sources */,
 				0324A633284475140076AA0D /* App+UIColor.swift in Sources */,
+				0324A6732845C00B0076AA0D /* QuoteTweetCellView.swift in Sources */,
 				0324A617284467420076AA0D /* Dependencies.swift in Sources */,
 				0324A62C284471AA0076AA0D /* NavigationController.swift in Sources */,
 				0324A62328446AAF0076AA0D /* LanguageService.swift in Sources */,
@@ -488,6 +519,7 @@
 				0324A6142844667D0076AA0D /* ViewModel.swift in Sources */,
 				0324A66628455ABB0076AA0D /* Rx+SDWebImage.swift in Sources */,
 				0324A63A2844786B0076AA0D /* FontStyle.swift in Sources */,
+				0324A6702845B5280076AA0D /* URLTweetCellViewModel.swift in Sources */,
 				0324A65528448FBA0076AA0D /* DIError.swift in Sources */,
 				0324A664284547770076AA0D /* NormalTweetCellViewModel.swift in Sources */,
 				0324A64A28447ECC0076AA0D /* InitialViewModel.swift in Sources */,

@@ -25,20 +25,35 @@ extension TweetCellType: IdentifiableType, Equatable {
     var identity: String {
         switch self {
         case .normal(let tweet, _):
-            return "N_" + tweet.data.id
+            return "N_" + tweet.data.identifier
         case .quoted(let tweet):
-            return "Q_" + tweet.data.id
+            return "Q_" + tweet.data.identifier
         case .url(let url):
-            return "U_" + url.url
+            return "U_" + url.identifier
         case .media(let media):
-            return "M_" + media.media_key
+            return "M_" + media.identifier
         case .poll(let poll):
-            return "P_" + poll.id
+            return "P_" + poll.identifier
         }
     }
     
     static func == (lhs: TweetCellType, rhs: TweetCellType) -> Bool {
         return lhs.identity == rhs.identity
+    }
+}
+
+struct SectionOfData {
+    var items: [Item]
+    var identity: String = UUID().uuidString
+}
+
+extension SectionOfData: SectionModelType, AnimatableSectionModelType {
+    
+    typealias Item = TweetCellType
+
+    init(original: SectionOfData, items: [Item]) {
+        self = original
+        self.items = items
     }
 }
 
@@ -52,9 +67,9 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
     let searchBarFullScreen: BehaviorRelay<Bool> = .init(value: true)
     let filterText: BehaviorRelay<String> = .init(value: "")
     
-    private let filterResults: BehaviorRelay<[Tweet]> = .init(value: [])
+    private let filterResults: BehaviorRelay<[SectionOfData]> = .init(value: [])
     private let streamOutput: PublishRelay<[Tweet]> = .init()
-    let data: PublishRelay<[[TweetCellType]]> = .init()
+    let data: PublishRelay<[SectionOfData]> = .init()
     
     let streamEnabled: BehaviorRelay<Bool> = .init(value: false)
     
@@ -88,13 +103,15 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
         // Append stream output to filterResults
         streamOutput
             .map { [weak self] out in
-                return out + (self?.filterResults.value ?? [])
+                return
+                    (self?.transform(tweets: out)
+                        .map { SectionOfData(items: $0) } ?? [])
+                    + (self?.filterResults.value ?? [])
             }
             .bind(to: filterResults)
             .disposed(by: disposeBag)
         
         filterResults
-            .map(transform(tweets:))
             .bind(to: data)
             .disposed(by: disposeBag)
         
