@@ -126,12 +126,12 @@ class NormalTweetCellView: RootCellView<NormalTweetCellViewModel> {
             usernameLabel.topAnchor.constraint(equalTo: avatarContainer.centerYAnchor, constant: 0)
         ])
         
-        /*NSLayoutConstraint.activate([
-            verifiedImageView.heightAnchor.constraint(equalTo: nameLabel.heightAnchor),
-            verifiedImageView.widthAnchor.constraint(equalTo: verifiedImageView.heightAnchor),
+        NSLayoutConstraint.activate([
+            verifiedImageView.heightAnchor.constraint(equalToConstant: 14),
+            verifiedImageView.widthAnchor.constraint(equalToConstant: 14),
             verifiedImageView.leadingAnchor.constraint(equalTo: nameLabel.trailingAnchor, constant: 4),
-            verifiedImageView.centerYAnchor.constraint(equalTo: nameLabel.centerYAnchor)
-        ])*/
+            verifiedImageView.bottomAnchor.constraint(equalTo: avatarContainer.centerYAnchor)
+        ])
     }
     
     override func setupViewModel() {

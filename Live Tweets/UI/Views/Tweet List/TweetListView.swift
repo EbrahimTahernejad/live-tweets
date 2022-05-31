@@ -83,7 +83,11 @@ class TweetListView: RootView<TweetListViewModel> {
                 cell?.viewModel.input.tweet.accept(tweet)
                 cell?.viewModel.input.retweeter.accept(retweeter)
                 return cell!
-            case .quoted(_), .url(_), .media(_), .poll(_):
+            case .media(let media):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: "MediaTweetCellView") as? MediaTweetCellView) ?? self.viewProvider?.provide(with: MediaTweetCellView.self, input: .init(), output: .init())
+                cell?.viewModel.input.media.accept(media)
+                return cell!
+            case .quoted(_), .url(_), .poll(_):
                 return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") ?? UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
             }
             

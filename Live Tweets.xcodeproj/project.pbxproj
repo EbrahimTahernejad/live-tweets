@@ -42,6 +42,8 @@
 		0324A662284547550076AA0D /* NormalTweetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A661284547550076AA0D /* NormalTweetCellView.swift */; };
 		0324A664284547770076AA0D /* NormalTweetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A663284547770076AA0D /* NormalTweetCellViewModel.swift */; };
 		0324A66628455ABB0076AA0D /* Rx+SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A66528455ABB0076AA0D /* Rx+SDWebImage.swift */; };
+		0324A669284594480076AA0D /* MediaTweetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A668284594480076AA0D /* MediaTweetCellView.swift */; };
+		0324A66B2845945C0076AA0D /* MediaTweetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A66A2845945C0076AA0D /* MediaTweetCellViewModel.swift */; };
 		5CC8338C020FED53028F939F /* Pods_Live_Tweets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,6 +88,8 @@
 		0324A661284547550076AA0D /* NormalTweetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalTweetCellView.swift; sourceTree = "<group>"; };
 		0324A663284547770076AA0D /* NormalTweetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalTweetCellViewModel.swift; sourceTree = "<group>"; };
 		0324A66528455ABB0076AA0D /* Rx+SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+SDWebImage.swift"; sourceTree = "<group>"; };
+		0324A668284594480076AA0D /* MediaTweetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTweetCellView.swift; sourceTree = "<group>"; };
+		0324A66A2845945C0076AA0D /* MediaTweetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTweetCellViewModel.swift; sourceTree = "<group>"; };
 		5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Live_Tweets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E5EF40AB1F29A4CD238163 /* Pods-Live Tweets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.release.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.release.xcconfig"; sourceTree = "<group>"; };
 		DD7FC5375B24AC017C725293 /* Pods-Live Tweets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.debug.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.debug.xcconfig"; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 		0324A65B2844C5250076AA0D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0324A667284594110076AA0D /* Media Tweet Cell */,
 				0324A65C2844C52A0076AA0D /* Normal Tweet Cell */,
 			);
 			path = Components;
@@ -309,6 +314,15 @@
 				0324A663284547770076AA0D /* NormalTweetCellViewModel.swift */,
 			);
 			path = "Normal Tweet Cell";
+			sourceTree = "<group>";
+		};
+		0324A667284594110076AA0D /* Media Tweet Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0324A668284594480076AA0D /* MediaTweetCellView.swift */,
+				0324A66A2845945C0076AA0D /* MediaTweetCellViewModel.swift */,
+			);
+			path = "Media Tweet Cell";
 			sourceTree = "<group>";
 		};
 		73453E0B29BBFE1346E5137C /* Frameworks */ = {
@@ -445,6 +459,7 @@
 			files = (
 				0324A64828447EC10076AA0D /* InitialView.swift in Sources */,
 				0324A65328448CDE0076AA0D /* Tweets.swift in Sources */,
+				0324A669284594480076AA0D /* MediaTweetCellView.swift in Sources */,
 				0324A5F828445BAF0076AA0D /* AppDelegate.swift in Sources */,
 				0324A62828446B500076AA0D /* Rules.swift in Sources */,
 				0324A62528446AAF0076AA0D /* APIRulesService.swift in Sources */,
@@ -463,6 +478,7 @@
 				0324A62328446AAF0076AA0D /* LanguageService.swift in Sources */,
 				0324A62A28446B6C0076AA0D /* EndPoint+APIMethod+Request.swift in Sources */,
 				0324A619284467610076AA0D /* Service.swift in Sources */,
+				0324A66B2845945C0076AA0D /* MediaTweetCellViewModel.swift in Sources */,
 				0324A63C2844798E0076AA0D /* ViewProvider.swift in Sources */,
 				0324A630284474D60076AA0D /* UIFont+Style.swift in Sources */,
 				0324A657284497480076AA0D /* APIStreamService.swift in Sources */,
