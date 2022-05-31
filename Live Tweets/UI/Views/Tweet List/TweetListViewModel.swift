@@ -161,6 +161,15 @@ class TweetListViewModel: BaseViewModel<EmptyIO, EmptyIO> {
         }
         
         var after: [TweetCellType] = []
+        // Check for polls, display the first one
+        if
+            let poll = tweet.attachments?.poll_ids?
+                .compactMap({ id in
+                    return includes?.polls?.first(where: { $0.id == id })
+                }).first
+        {
+            after.append(.poll(poll))
+        }
         
         // Check if there are any medias and show them
         if

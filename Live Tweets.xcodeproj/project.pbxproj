@@ -48,6 +48,8 @@
 		0324A6702845B5280076AA0D /* URLTweetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A66F2845B5280076AA0D /* URLTweetCellViewModel.swift */; };
 		0324A6732845C00B0076AA0D /* QuoteTweetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A6722845C00B0076AA0D /* QuoteTweetCellView.swift */; };
 		0324A6752845C0190076AA0D /* QuoteTweetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A6742845C0190076AA0D /* QuoteTweetCellViewModel.swift */; };
+		0324A6782845CB3A0076AA0D /* PollTweetCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A6772845CB3A0076AA0D /* PollTweetCellView.swift */; };
+		0324A67A2845CB480076AA0D /* PollTweetCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324A6792845CB480076AA0D /* PollTweetCellViewModel.swift */; };
 		5CC8338C020FED53028F939F /* Pods_Live_Tweets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +100,8 @@
 		0324A66F2845B5280076AA0D /* URLTweetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLTweetCellViewModel.swift; sourceTree = "<group>"; };
 		0324A6722845C00B0076AA0D /* QuoteTweetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTweetCellView.swift; sourceTree = "<group>"; };
 		0324A6742845C0190076AA0D /* QuoteTweetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTweetCellViewModel.swift; sourceTree = "<group>"; };
+		0324A6772845CB3A0076AA0D /* PollTweetCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollTweetCellView.swift; sourceTree = "<group>"; };
+		0324A6792845CB480076AA0D /* PollTweetCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollTweetCellViewModel.swift; sourceTree = "<group>"; };
 		5A13E12EE24A6F44E75244C5 /* Pods_Live_Tweets.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Live_Tweets.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6E5EF40AB1F29A4CD238163 /* Pods-Live Tweets.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.release.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.release.xcconfig"; sourceTree = "<group>"; };
 		DD7FC5375B24AC017C725293 /* Pods-Live Tweets.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Live Tweets.debug.xcconfig"; path = "Target Support Files/Pods-Live Tweets/Pods-Live Tweets.debug.xcconfig"; sourceTree = "<group>"; };
@@ -309,6 +313,7 @@
 		0324A65B2844C5250076AA0D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				0324A6762845CB090076AA0D /* Poll Tweet Cell */,
 				0324A6712845BFFB0076AA0D /* Quote Tweet Cell */,
 				0324A66C2845B4490076AA0D /* URL Tweet Cell */,
 				0324A667284594110076AA0D /* Media Tweet Cell */,
@@ -351,6 +356,15 @@
 				0324A6742845C0190076AA0D /* QuoteTweetCellViewModel.swift */,
 			);
 			path = "Quote Tweet Cell";
+			sourceTree = "<group>";
+		};
+		0324A6762845CB090076AA0D /* Poll Tweet Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0324A6772845CB3A0076AA0D /* PollTweetCellView.swift */,
+				0324A6792845CB480076AA0D /* PollTweetCellViewModel.swift */,
+			);
+			path = "Poll Tweet Cell";
 			sourceTree = "<group>";
 		};
 		73453E0B29BBFE1346E5137C /* Frameworks */ = {
@@ -503,6 +517,8 @@
 				0324A5FA28445BAF0076AA0D /* SceneDelegate.swift in Sources */,
 				0324A635284475370076AA0D /* String+CamelToKebab.swift in Sources */,
 				0324A633284475140076AA0D /* App+UIColor.swift in Sources */,
+				0324A6782845CB3A0076AA0D /* PollTweetCellView.swift in Sources */,
+				0324A67A2845CB480076AA0D /* PollTweetCellViewModel.swift in Sources */,
 				0324A6732845C00B0076AA0D /* QuoteTweetCellView.swift in Sources */,
 				0324A617284467420076AA0D /* Dependencies.swift in Sources */,
 				0324A62C284471AA0076AA0D /* NavigationController.swift in Sources */,

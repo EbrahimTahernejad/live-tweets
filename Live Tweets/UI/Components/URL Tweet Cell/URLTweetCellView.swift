@@ -5,8 +5,6 @@
 //  Created by Ebrahim Tahernejad on 3/10/1401 AP.
 //
 
-import UIKit
-
 import Foundation
 import UIKit
 import SDWebImage
@@ -32,6 +30,8 @@ class URLTweetCellView: RootCellView<URLTweetCellViewModel> {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
         return imageView
     }()
     

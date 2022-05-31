@@ -106,7 +106,7 @@ struct TweetPoll: Codable {
     
     let options: [PollOption]
     let id: String
-    let status: PollStatus
+    let voting_status: PollStatus
     let end_datetime: Date
     let duration_minutes: Int
 }

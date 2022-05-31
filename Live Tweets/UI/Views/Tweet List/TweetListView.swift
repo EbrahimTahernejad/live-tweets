@@ -83,8 +83,10 @@ class TweetListView: RootView<TweetListViewModel> {
                 let cell = (tableView.dequeueReusableCell(withIdentifier: "QuoteTweetCellView") as? QuoteTweetCellView) ?? self.viewProvider?.provide(with: QuoteTweetCellView.self, input: .init(), output: .init())
                 cell?.viewModel.input.tweet.accept(tweet)
                 return cell!
-            case .poll(_):
-                return tableView.dequeueReusableCell(withIdentifier: "UITableViewCell") ?? UITableViewCell(style: .default, reuseIdentifier: "UITableViewCell")
+            case .poll(let poll):
+                let cell = (tableView.dequeueReusableCell(withIdentifier: "PollTweetCellView") as? PollTweetCellView) ?? self.viewProvider?.provide(with: PollTweetCellView.self, input: .init(), output: .init())
+                cell?.viewModel.input.poll.accept(poll)
+                return cell!
             }
             
         }
