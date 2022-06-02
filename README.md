@@ -35,7 +35,7 @@ Every view should conform to `RootViewProtocol`
 
 Just for ease We've added a base class for `UIView` called `RootView`, and for `UITableViewCell` called `RootCellView`. It can be done for other types of `UIView` as well.
 
-## View Models
+### View Models
 
 Every view model should conform to `BaseViewModelProtocol`
 
@@ -57,7 +57,7 @@ class var inject: DependencyOptions {
 }
 ```
 
-## Dependency Injection
+### Dependency Injection
 
 Dependencies conform to `ServiceProtocol`
 
@@ -65,7 +65,7 @@ To add a new dependency, you'll need to modify each object inside the file `Depe
 
 Then provide and instance of them wherever the `ViewProvider` is created (here, we have it in `SceneDelegate`)
 
-## View Provider
+### View Provider
 
 `ViewProvider` is the class which creates views and injects dependencies in them.
 
@@ -73,7 +73,7 @@ It is automatocally injected into all views.
 
 The `provide` function should be used to create an instance of a view.
 
-## Router
+### Router
 
 The router manages routing system of our app.
 
